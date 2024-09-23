@@ -3,6 +3,7 @@ import Sidebar from '../components/Sidebar';
 import SearchBar from '../components/SearchBar';
 import TabNavigation from '../components/TabNavigation';
 import PromptGrid from '../components/PromptGrid';
+import GeneratePromptButton from '../components/GeneratePromptButton';
 
 const Index = () => {
   const samplePrompts = [
@@ -47,7 +48,7 @@ const Index = () => {
   return (
     <div className="flex">
       <Sidebar />
-      <main className="flex-1 p-6">
+      <main className="flex-1 p-6 relative">
         <div className="mb-2 w-full">
           <SearchBar />
         </div>
@@ -55,6 +56,7 @@ const Index = () => {
           <TabNavigation />
         </div>
         <PromptGrid prompts={samplePrompts} />
+        <GeneratePromptButton />
       </main>
     </div>
   );
