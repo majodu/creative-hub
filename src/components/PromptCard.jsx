@@ -1,16 +1,19 @@
 import React from 'react';
-import { ThumbsUp, Bookmark } from 'lucide-react';
+import { ThumbsUp, Bookmark, Star } from 'lucide-react';
 
-const PromptCard = ({ title, description, likes, tags }) => {
+const PromptCard = ({ title, prompt, likes, tags, isFavorited }) => {
   return (
     <div className="bg-white p-3 rounded-lg shadow-sm">
       <div className="flex justify-between items-start">
         <h2 className="text-lg font-semibold text-gray-900">{title}</h2>
-        <button className="text-gray-400 hover:text-gray-600">
-          <Bookmark className="h-4 w-4" />
-        </button>
+        <div className="flex items-center space-x-2">
+          {isFavorited && <Star className="h-4 w-4 text-yellow-400 fill-current" />}
+          <button className="text-gray-400 hover:text-gray-600">
+            <Bookmark className="h-4 w-4" />
+          </button>
+        </div>
       </div>
-      <p className="mt-1 text-xs text-gray-600">{description}</p>
+      <p className="mt-1 text-xs text-gray-600">{prompt}</p>
       <div className="mt-3 flex items-center justify-between">
         <button className="flex items-center space-x-1 text-xs text-gray-600 hover:text-gray-800">
           <ThumbsUp className="h-3 w-3" />

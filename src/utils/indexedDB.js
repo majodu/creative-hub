@@ -13,9 +13,12 @@ const initDB = async () => {
   });
 };
 
-export const savePrompt = async (prompt) => {
+export const savePrompt = async (promptData) => {
   const db = await initDB();
-  return db.add(storeName, prompt);
+  return db.add(storeName, {
+    ...promptData,
+    createdAt: new Date().toISOString(),
+  });
 };
 
 export const getAllPrompts = async () => {
