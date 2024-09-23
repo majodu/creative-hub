@@ -4,12 +4,13 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const PromptVersionControl = ({ currentVersion, totalVersions, onPrevious, onNext }) => {
   return (
-    <div className="flex items-center space-x-2">
+    <div className="flex items-center space-x-1 text-sm">
       <Button
         variant="ghost"
         size="sm"
         onClick={onPrevious}
         disabled={currentVersion === 1}
+        className="p-1 h-auto"
       >
         <ChevronLeft className="h-4 w-4" />
       </Button>
@@ -21,6 +22,7 @@ const PromptVersionControl = ({ currentVersion, totalVersions, onPrevious, onNex
         size="sm"
         onClick={onNext}
         disabled={currentVersion === totalVersions}
+        className="p-1 h-auto"
       >
         <ChevronRight className="h-4 w-4" />
       </Button>

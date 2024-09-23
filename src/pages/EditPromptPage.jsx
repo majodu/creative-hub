@@ -9,6 +9,7 @@ import { getPromptById, updatePrompt } from '../utils/indexedDB';
 import { toast } from 'sonner';
 import { ArrowLeft } from 'lucide-react';
 import PromptVersionControl from '../components/PromptVersionControl';
+import DiffIndicator from '../components/DiffIndicator';
 
 const EditPromptPage = () => {
   const { id } = useParams();
@@ -106,13 +107,19 @@ const EditPromptPage = () => {
             required
           />
         </div>
-        <div className="mt-1 mb-4">
+        <div className="flex items-center space-x-2 text-sm">
           <PromptVersionControl
             currentVersion={currentVersionIndex + 1}
             totalVersions={versions.length}
             onPrevious={() => handleVersionChange(Math.max(0, currentVersionIndex - 1))}
             onNext={() => handleVersionChange(Math.min(versions.length - 1, currentVersionIndex + 1))}
           />
+          {currentVersionIndex > 0 && (
+            <DiffIndicator
+              oldText={versions[currentVersionIndex - 1]}
+              newText={versions[currentVersionIndex]}
+            />
+          )}
         </div>
         <div>
           <Label htmlFor="tags">Tags</Label>
