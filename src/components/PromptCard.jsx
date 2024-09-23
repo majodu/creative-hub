@@ -1,12 +1,12 @@
 import React from 'react';
-import { Share, Bookmark, BookmarkCheck } from 'lucide-react';
+import { Share, Bookmark, BookmarkCheck, Check } from 'lucide-react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { updatePrompt } from '../utils/indexedDB';
 import { toast } from 'sonner';
 import { truncateText } from '../utils/textUtils';
 import { useNavigate } from 'react-router-dom';
 
-const PromptCard = ({ id, title, prompt, likes, tags, bookmarked }) => {
+const PromptCard = ({ id, title, prompt, likes, tags, bookmarked, onSelect, isSelected }) => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
@@ -30,26 +30,39 @@ const PromptCard = ({ id, title, prompt, likes, tags, bookmarked }) => {
     navigate(`/edit-prompt/${id}`);
   };
 
+  const handleSelect = (e) => {
+    e.stopPropagation();
+    onSelect(id);
+  };
+
   const shouldShowTags = tags.length > 1 || (tags.length === 1 && tags[0] !== '');
 
   return (
     <div 
-      className="bg-white p-3 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow cursor-pointer"
+      className="bg-white p-3 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow cursor-pointer relative"
       onClick={handleCardClick}
     >
       <div className="flex justify-between items-start">
         <h2 className="text-lg font-semibold text-gray-900">{title}</h2>
-        <button 
-          className={`text-gray-400 hover:text-gray-600 ${bookmarked ? 'text-blue-500' : ''}`}
-          onClick={handleBookmark}
-          disabled={bookmarkMutation.isLoading}
-        >
-          {bookmarked ? (
-            <BookmarkCheck className="h-4 w-4" />
-          ) : (
-            <Bookmark className="h-4 w-4" />
-          )}
-        </button>
+        <div className="flex space-x-2">
+          <button 
+            className={`text-gray-400 hover:text-gray-600 ${bookmarked ? 'text-blue-500' : ''}`}
+            onClick={handleBookmark}
+            disabled={bookmarkMutation.isLoading}
+          >
+            {bookmarked ? (
+              <BookmarkCheck className="h-4 w-4" />
+            ) : (
+              <Bookmark className="h-4 w-4" />
+            )}
+          </button>
+          <button 
+            className={`text-gray-400 hover:text-gray-600 ${isSelected ? 'text-green-500' : ''}`}
+            onClick={handleSelect}
+          >
+            <Check className="h-4 w-4" />
+          </button>
+        </div>
       </div>
       <p className="mt-1 text-xs text-gray-600">{truncateText(prompt, 100)}</p>
       <div className="mt-3 flex items-center justify-between">
