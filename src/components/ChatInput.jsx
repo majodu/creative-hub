@@ -19,7 +19,7 @@ const ChatInput = () => {
           type="text"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          placeholder="Type your prompt here..."
+          placeholder="Type your template description here..."
           className="flex-grow px-4 py-2 rounded-l-lg focus:outline-none"
         />
         <button
