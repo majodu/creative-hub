@@ -3,7 +3,7 @@ import { Command } from 'lucide-react';
 
 const SearchBar = () => {
   return (
-    <div className="flex items-center justify-between w-full max-w-3xl mx-auto bg-[#f5f5f5] rounded-lg h-10 px-2">
+    <div className="flex items-center justify-between w-full bg-[#f5f5f5] rounded-lg h-10 px-2">
       <div className="flex items-center flex-1">
         <div className="flex items-center mr-2">
           <div className="bg-gray-200 rounded-full p-1 mr-1">
