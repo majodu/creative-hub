@@ -1,6 +1,7 @@
 import React from 'react';
 import Sidebar from '../components/Sidebar';
 import SearchBar from '../components/SearchBar';
+import TabNavigation from '../components/TabNavigation';
 
 const Index = () => {
   return (
@@ -11,8 +12,7 @@ const Index = () => {
           <SearchBar />
         </div>
         <div className="px-8">
-          <h1 className="text-3xl font-bold mb-4">Welcome to PromptKeeper</h1>
-          <p className="text-lg">Start managing your prompts efficiently!</p>
+          <TabNavigation />
           {/* Add more content here */}
         </div>
       </main>
