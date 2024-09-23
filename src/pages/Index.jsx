@@ -53,14 +53,19 @@ const Index = () => {
         </div>
         <div className="flex justify-between items-center mb-4">
           <Button
-            variant={showBookmarked ? "secondary" : "outline"}
+            variant="ghost"
+            size="sm"
             onClick={toggleBookmarkFilter}
-            className="flex items-center space-x-2"
+            className={`flex items-center space-x-2 text-xs ${showBookmarked ? 'text-blue-500' : 'text-gray-500'}`}
           >
-            <BookmarkIcon className="h-4 w-4" />
+            <BookmarkIcon className="h-3 w-3" />
             <span>{showBookmarked ? "Show All" : "Show Bookmarked"}</span>
           </Button>
-          <ExportWidget selectedPrompts={selectedPrompts} prompts={prompts} />
+          <ExportWidget 
+            selectedPrompts={selectedPrompts} 
+            prompts={prompts}
+            className="text-xs text-gray-500 hover:text-gray-700"
+          />
         </div>
         <PromptGrid 
           prompts={filteredPrompts} 
