@@ -24,7 +24,7 @@ const PromptCard = ({ id, title, prompt, likes, tags, bookmarked }) => {
   };
 
   return (
-    <div className="bg-white p-3 rounded-lg shadow-sm">
+    <div className="bg-white p-3 rounded-lg shadow-sm border border-gray-200">
       <div className="flex justify-between items-start">
         <h2 className="text-lg font-semibold text-gray-900">{title}</h2>
         <button 
