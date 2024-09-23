@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { Sparkles } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const ChatInput = () => {
   const [message, setMessage] = useState('');
+  const navigate = useNavigate();
 
   const handleGenerate = () => {
     if (message.trim()) {
-      // TODO: Implement generating response from chatbot
-      console.log('Generating response for:', message);
-      setMessage('');
+      // Navigate to the new prompt page
+      navigate('/new-prompt', { state: { initialPrompt: message } });
     }
   };
 

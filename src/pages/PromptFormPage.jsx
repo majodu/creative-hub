@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
@@ -8,6 +9,13 @@ const PromptFormPage = () => {
   const [title, setTitle] = useState('');
   const [prompt, setPrompt] = useState('');
   const [tags, setTags] = useState('');
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.state && location.state.initialPrompt) {
+      setPrompt(location.state.initialPrompt);
+    }
+  }, [location]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
