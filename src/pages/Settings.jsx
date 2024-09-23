@@ -14,16 +14,20 @@ const Settings = () => {
   const [openaiKey, setOpenaiKey] = useState('');
 
   useEffect(() => {
-    const storedOpenaiKey = secureStore.getItem('openaiKey');
-    if (storedOpenaiKey) {
-      setOpenaiKey(storedOpenaiKey);
-    }
+    const loadSettings = async () => {
+      const storedOpenaiKey = await secureStore.getItem('openaiKey');
+      if (storedOpenaiKey) {
+        setOpenaiKey(storedOpenaiKey);
+      }
+      // Load other settings here
+    };
+    loadSettings();
   }, []);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    secureStore.setItem('openaiKey', openaiKey);
-    // TODO: Implement other settings update logic
+    await secureStore.setItem('openaiKey', openaiKey);
+    // Save other settings here
     console.log('Settings updated:', { username, email, notifications, darkMode, openaiKey });
   };
 
