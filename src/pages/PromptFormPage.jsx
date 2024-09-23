@@ -15,7 +15,7 @@ const PromptFormPage = () => {
     if (location.state && location.state.initialPrompt) {
       setPrompt(location.state.initialPrompt);
     }
-  }, [location]);
+  }, [location.state]);
 
   const handleSubmit = (e) => {
     e.preventDefault();

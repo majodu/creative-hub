@@ -8,7 +8,6 @@ const ChatInput = () => {
 
   const handleGenerate = () => {
     if (message.trim()) {
-      // Navigate to the new prompt page with the entered message
       navigate('/new-prompt', { state: { initialPrompt: message } });
     }
   };

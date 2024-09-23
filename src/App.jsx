@@ -4,6 +4,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { navItems } from "./nav-items";
 import Sidebar from "./components/Sidebar";
+import Index from "./pages/Index";
+import PromptFormPage from "./pages/PromptFormPage";
 
 const queryClient = new QueryClient();
 
@@ -16,9 +18,8 @@ const App = () => (
           <Sidebar />
           <main className="flex-1">
             <Routes>
-              {navItems.map(({ to, page }) => (
-                <Route key={to} path={to} element={page} />
-              ))}
+              <Route path="/" element={<Index />} />
+              <Route path="/new-prompt" element={<PromptFormPage />} />
             </Routes>
           </main>
         </div>
