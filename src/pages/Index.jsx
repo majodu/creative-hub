@@ -56,6 +56,7 @@ const Index = () => {
           <TabNavigation />
         </div>
         <PromptGrid prompts={samplePrompts} />
+        <div className="h-20"></div> {/* Spacer for ChatInput */}
         <ChatInput />
       </main>
     </div>
