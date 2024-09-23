@@ -122,8 +122,14 @@ const EditPromptPage = () => {
           <PromptVersionControl
             currentVersion={currentVersionIndex + 1}
             totalVersions={versions.length}
-            onPrevious={() => handleVersionChange(Math.max(0, currentVersionIndex - 1))}
-            onNext={() => handleVersionChange(Math.min(versions.length - 1, currentVersionIndex + 1))}
+            onPrevious={(e) => {
+              e.preventDefault();
+              handleVersionChange(Math.max(0, currentVersionIndex - 1));
+            }}
+            onNext={(e) => {
+              e.preventDefault();
+              handleVersionChange(Math.min(versions.length - 1, currentVersionIndex + 1));
+            }}
           />
           {currentVersionIndex > 0 && (
             <DiffIndicator
