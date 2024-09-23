@@ -6,7 +6,7 @@ const Index = () => {
   return (
     <div className="flex">
       <Sidebar />
-      <main className="flex-1 p-8">
+      <main className="flex-1 px-8 pb-8">
         <div className="mb-8">
           <SearchBar />
         </div>
