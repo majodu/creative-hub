@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Settings as SettingsIcon } from 'lucide-react';
+import { secureStore } from '../utils/secureStorage';
 
 const Settings = () => {
   const [username, setUsername] = useState('');
@@ -12,9 +13,17 @@ const Settings = () => {
   const [darkMode, setDarkMode] = useState(false);
   const [openaiKey, setOpenaiKey] = useState('');
 
+  useEffect(() => {
+    const storedOpenaiKey = secureStore.getItem('openaiKey');
+    if (storedOpenaiKey) {
+      setOpenaiKey(storedOpenaiKey);
+    }
+  }, []);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    // TODO: Implement settings update logic
+    secureStore.setItem('openaiKey', openaiKey);
+    // TODO: Implement other settings update logic
     console.log('Settings updated:', { username, email, notifications, darkMode, openaiKey });
   };
 
