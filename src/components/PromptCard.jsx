@@ -1,5 +1,5 @@
 import React from 'react';
-import { ThumbsUp, Bookmark, BookmarkCheck } from 'lucide-react';
+import { Share, Bookmark, BookmarkCheck } from 'lucide-react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { updatePrompt } from '../utils/indexedDB';
 import { toast } from 'sonner';
@@ -42,7 +42,7 @@ const PromptCard = ({ id, title, prompt, likes, tags, bookmarked }) => {
       <p className="mt-1 text-xs text-gray-600">{truncateText(prompt, 100)}</p>
       <div className="mt-3 flex items-center justify-between">
         <button className="flex items-center space-x-1 text-xs text-gray-600 hover:text-gray-800">
-          <ThumbsUp className="h-3 w-3" />
+          <Share className="h-3 w-3" />
           <span>{likes}</span>
         </button>
         <div className="flex space-x-2">
