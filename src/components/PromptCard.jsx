@@ -1,5 +1,5 @@
 import React from 'react';
-import { Share, Bookmark, BookmarkCheck, Check } from 'lucide-react';
+import { Share, Bookmark, BookmarkCheck } from 'lucide-react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { updatePrompt } from '../utils/indexedDB';
 import { toast } from 'sonner';
@@ -49,7 +49,7 @@ const PromptCard = ({ id, title, prompt, likes, tags, bookmarked, onSelect, isSe
             checked={isSelected}
             onCheckedChange={() => onSelect(id)}
             onClick={(e) => e.stopPropagation()}
-            className="mr-2"
+            className="mr-2 h-3 w-3 rounded-sm border-gray-300 text-primary-600 focus:ring-primary-500"
           />
           <h2 className="text-lg font-semibold text-gray-900">{title}</h2>
         </div>
