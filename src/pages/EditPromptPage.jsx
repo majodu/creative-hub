@@ -6,6 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { getPromptById, updatePrompt } from '../utils/indexedDB';
+import { compareTexts } from '../utils/diffUtils'; // Add this import
 import { toast } from 'sonner';
 import { ArrowLeft } from 'lucide-react';
 import PromptVersionControl from '../components/PromptVersionControl';
