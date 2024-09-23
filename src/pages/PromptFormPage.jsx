@@ -64,12 +64,12 @@ const PromptFormPage = () => {
           />
         </div>
         <div>
-          <Label htmlFor="prompt">Generated Prompt</Label>
+          <Label htmlFor="prompt">Prompt</Label>
           <Textarea
             id="prompt"
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
-            placeholder="Your generated prompt will appear here"
+            placeholder="Enter your prompt here"
             rows={6}
             required
           />
