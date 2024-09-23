@@ -1,5 +1,5 @@
 import React from 'react';
-import { ThumbsUp, Bookmark, Star } from 'lucide-react';
+import { ThumbsUp, Bookmark, BookmarkFilled } from 'lucide-react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { updatePrompt } from '../utils/indexedDB';
 import { toast } from 'sonner';
@@ -26,16 +26,17 @@ const PromptCard = ({ id, title, prompt, likes, tags, bookmarked }) => {
     <div className="bg-white p-3 rounded-lg shadow-sm">
       <div className="flex justify-between items-start">
         <h2 className="text-lg font-semibold text-gray-900">{title}</h2>
-        <div className="flex items-center space-x-2">
-          {bookmarked && <Star className="h-4 w-4 text-yellow-400 fill-current" />}
-          <button 
-            className={`text-gray-400 hover:text-gray-600 ${bookmarked ? 'text-yellow-400' : ''}`}
-            onClick={handleBookmark}
-            disabled={bookmarkMutation.isLoading}
-          >
+        <button 
+          className={`text-gray-400 hover:text-gray-600 ${bookmarked ? 'text-blue-500' : ''}`}
+          onClick={handleBookmark}
+          disabled={bookmarkMutation.isLoading}
+        >
+          {bookmarked ? (
+            <BookmarkFilled className="h-4 w-4" />
+          ) : (
             <Bookmark className="h-4 w-4" />
-          </button>
-        </div>
+          )}
+        </button>
       </div>
       <p className="mt-1 text-xs text-gray-600">{prompt}</p>
       <div className="mt-3 flex items-center justify-between">
