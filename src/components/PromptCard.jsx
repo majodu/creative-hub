@@ -20,7 +20,7 @@ const PromptCard = ({ title, description, likes, tags }) => {
           {tags.map((tag, index) => (
             <button
               key={index}
-              className="px-1.5 py-0.5 text-2xs font-medium text-gray-600 bg-white border border-gray-300 rounded-md hover:bg-gray-100"
+              className="px-1.5 py-0.5 text-[10px] font-medium text-gray-600 bg-white border border-gray-300 rounded-md hover:bg-gray-100"
             >
               {tag}
             </button>
