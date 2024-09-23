@@ -1,5 +1,5 @@
 import React from 'react';
-import { ThumbsUp, Bookmark, BookmarkFilled } from 'lucide-react';
+import { ThumbsUp, Bookmark, BookmarkCheck } from 'lucide-react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { updatePrompt } from '../utils/indexedDB';
 import { toast } from 'sonner';
@@ -32,7 +32,7 @@ const PromptCard = ({ id, title, prompt, likes, tags, bookmarked }) => {
           disabled={bookmarkMutation.isLoading}
         >
           {bookmarked ? (
-            <BookmarkFilled className="h-4 w-4" />
+            <BookmarkCheck className="h-4 w-4" />
           ) : (
             <Bookmark className="h-4 w-4" />
           )}
