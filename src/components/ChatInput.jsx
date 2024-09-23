@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { Send } from 'lucide-react';
+import { Sparkles } from 'lucide-react';
 
 const ChatInput = () => {
   const [message, setMessage] = useState('');
 
-  const handleSendMessage = () => {
+  const handleGenerate = () => {
     if (message.trim()) {
-      // TODO: Implement sending message to chatbot
-      console.log('Sending message:', message);
+      // TODO: Implement generating response from chatbot
+      console.log('Generating response for:', message);
       setMessage('');
     }
   };
@@ -19,15 +19,15 @@ const ChatInput = () => {
           type="text"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          placeholder="Type your message here..."
+          placeholder="Type your prompt here..."
           className="flex-grow px-4 py-2 rounded-l-lg focus:outline-none"
         />
         <button
-          onClick={handleSendMessage}
+          onClick={handleGenerate}
           className="bg-purple-600 text-white px-4 py-2 rounded-r-lg hover:bg-purple-700 transition-colors duration-300 flex items-center"
         >
-          <Send className="w-5 h-5 mr-2" />
-          <span>Send</span>
+          <Sparkles className="w-5 h-5 mr-2" />
+          <span>Generate</span>
         </button>
       </div>
     </div>
