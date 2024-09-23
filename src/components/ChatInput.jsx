@@ -13,8 +13,8 @@ const ChatInput = () => {
   };
 
   return (
-    <div className="absolute bottom-6 left-0 right-0 flex justify-center">
-      <div className="flex items-center bg-white rounded-lg shadow-lg max-w-2xl w-full mx-4 border border-gray-300">
+    <div className="flex justify-center w-full">
+      <div className="flex items-center bg-white rounded-lg shadow-lg max-w-2xl w-full border border-gray-300">
         <input
           type="text"
           value={message}

@@ -45,16 +45,19 @@ const Index = () => {
   ];
 
   return (
-    <main className="flex-1 p-6 relative">
-      <div className="mb-2 w-full">
-        <SearchBar />
+    <main className="flex-1 flex flex-col h-full">
+      <div className="flex-grow overflow-auto p-6">
+        <div className="mb-2 w-full">
+          <SearchBar />
+        </div>
+        <div className="mb-2">
+          <TabNavigation />
+        </div>
+        <PromptGrid prompts={samplePrompts} />
       </div>
-      <div className="mb-2">
-        <TabNavigation />
+      <div className="p-6 bg-white border-t">
+        <ChatInput />
       </div>
-      <PromptGrid prompts={samplePrompts} />
-      <div className="h-20"></div> {/* Spacer for ChatInput */}
-      <ChatInput />
     </main>
   );
 };
