@@ -6,7 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { getPromptById, updatePrompt } from '../utils/indexedDB';
-import { compareTexts } from '../utils/diffUtils'; // Add this import
+import { compareTexts } from '../utils/diffUtils';
 import { toast } from 'sonner';
 import { ArrowLeft } from 'lucide-react';
 import PromptVersionControl from '../components/PromptVersionControl';
@@ -77,7 +77,7 @@ const EditPromptPage = () => {
   };
 
   const handleViewChanges = (e) => {
-    e.preventDefault(); // Prevent form submission
+    e.preventDefault();
     const diffs = compareTexts(versions[currentVersionIndex - 1], versions[currentVersionIndex]);
     setCurrentDiffs(diffs);
     setIsDiffModalOpen(true);
