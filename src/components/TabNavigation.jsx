@@ -11,12 +11,12 @@ const TabNavigation = () => {
 
   return (
     <div className="bg-[#F5F5F5] p-1 rounded-lg">
-      <nav className="flex space-x-2">
+      <nav className="flex">
         {tabs.map((tab) => (
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`px-5 py-2 text-base font-medium rounded-md transition-colors duration-200 ${
+            className={`flex-grow px-5 py-2 text-base font-medium rounded-md transition-colors duration-200 ${
               activeTab === tab.id
                 ? 'bg-white text-[#333333] shadow-sm'
                 : 'bg-[#EAEAEA] text-[#666666] hover:bg-[#D9D9D9]'
