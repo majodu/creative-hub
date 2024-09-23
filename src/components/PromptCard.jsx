@@ -3,6 +3,7 @@ import { ThumbsUp, Bookmark, BookmarkCheck } from 'lucide-react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { updatePrompt } from '../utils/indexedDB';
 import { toast } from 'sonner';
+import { truncateText } from '../utils/textUtils';
 
 const PromptCard = ({ id, title, prompt, likes, tags, bookmarked }) => {
   const queryClient = useQueryClient();
@@ -38,7 +39,7 @@ const PromptCard = ({ id, title, prompt, likes, tags, bookmarked }) => {
           )}
         </button>
       </div>
-      <p className="mt-1 text-xs text-gray-600">{prompt}</p>
+      <p className="mt-1 text-xs text-gray-600">{truncateText(prompt, 100)}</p>
       <div className="mt-3 flex items-center justify-between">
         <button className="flex items-center space-x-1 text-xs text-gray-600 hover:text-gray-800">
           <ThumbsUp className="h-3 w-3" />
