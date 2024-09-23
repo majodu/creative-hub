@@ -5,10 +5,10 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { getPromptById, updatePrompt } from '../utils/indexedDB';
+import { getPromptById, updatePrompt, deletePrompt } from '../utils/indexedDB';
 import { compareTexts } from '../utils/diffUtils';
 import { toast } from 'sonner';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Trash2 } from 'lucide-react';
 import PromptVersionControl from '../components/PromptVersionControl';
 import DiffIndicator from '../components/DiffIndicator';
 import DiffModal from '../components/DiffModal';
@@ -55,6 +55,19 @@ const EditPromptPage = () => {
     },
   });
 
+  const deletePromptMutation = useMutation({
+    mutationFn: deletePrompt,
+    onSuccess: () => {
+      queryClient.invalidateQueries(['prompts']);
+      toast.success('Prompt deleted successfully!');
+      navigate('/');
+    },
+    onError: (error) => {
+      console.error('Error deleting prompt:', error);
+      toast.error('Failed to delete prompt. Please try again.');
+    },
+  });
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const newVersions = [...versions, prompt];
@@ -65,6 +78,12 @@ const EditPromptPage = () => {
       tags: tags.split(',').map(tag => tag.trim()),
       versions: newVersions,
     });
+  };
+
+  const handleDelete = () => {
+    if (window.confirm('Are you sure you want to delete this prompt?')) {
+      deletePromptMutation.mutate(parseInt(id));
+    }
   };
 
   const handleBack = () => {
@@ -148,7 +167,12 @@ const EditPromptPage = () => {
             placeholder="Enter tags separated by commas"
           />
         </div>
-        <Button type="submit">Update Prompt Template</Button>
+        <div className="flex justify-between">
+          <Button type="submit">Update Prompt Template</Button>
+          <Button type="button" variant="destructive" onClick={handleDelete}>
+            <Trash2 className="mr-2 h-4 w-4" /> Delete Prompt
+          </Button>
+        </div>
       </form>
       <DiffModal
         isOpen={isDiffModalOpen}
