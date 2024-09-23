@@ -1,6 +1,7 @@
-import { HomeIcon, PlusCircleIcon } from "lucide-react";
+import { HomeIcon, PlusCircleIcon, Settings } from "lucide-react";
 import Index from "./pages/Index.jsx";
 import PromptFormPage from "./pages/PromptFormPage.jsx";
+import SettingsPage from "./pages/Settings.jsx";
 
 export const navItems = [
   {
@@ -14,5 +15,11 @@ export const navItems = [
     to: "/new-prompt",
     icon: <PlusCircleIcon className="h-4 w-4" />,
     page: <PromptFormPage />,
+  },
+  {
+    title: "Settings",
+    to: "/settings",
+    icon: <Settings className="h-4 w-4" />,
+    page: <SettingsPage />,
   },
 ];
