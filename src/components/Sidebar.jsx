@@ -1,5 +1,6 @@
 import React from 'react';
 import { Home, FolderTree, Activity, Settings, Archive, Plus, Chrome, Globe, Code } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Sidebar = () => {
   return (
@@ -29,34 +30,34 @@ const Sidebar = () => {
         <h4 className="text-xs font-semibold text-gray-500 mb-2">Main</h4>
         <ul className="space-y-2">
           <li>
-            <a href="#" className="flex items-center text-gray-700 hover:text-black">
+            <Link to="/" className="flex items-center text-gray-700 hover:text-black">
               <Home className="w-4 h-4 mr-3" />
               <span>Home</span>
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="#" className="flex items-center text-gray-700 hover:text-black">
+            <Link to="/categories" className="flex items-center text-gray-700 hover:text-black">
               <FolderTree className="w-4 h-4 mr-3" />
               <span>Categories</span>
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="#" className="flex items-center text-gray-700 hover:text-black">
+            <Link to="/activity" className="flex items-center text-gray-700 hover:text-black">
               <Activity className="w-4 h-4 mr-3" />
               <span>Activity</span>
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="#" className="flex items-center text-gray-700 hover:text-black">
+            <Link to="/settings" className="flex items-center text-gray-700 hover:text-black">
               <Settings className="w-4 h-4 mr-3" />
               <span>Settings</span>
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="#" className="flex items-center text-gray-700 hover:text-black">
+            <Link to="/archive" className="flex items-center text-gray-700 hover:text-black">
               <Archive className="w-4 h-4 mr-3" />
               <span>Archive</span>
-            </a>
+            </Link>
           </li>
         </ul>
       </nav>
