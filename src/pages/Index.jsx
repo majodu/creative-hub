@@ -10,8 +10,11 @@ const Index = () => {
         <div className="mb-8">
           <SearchBar />
         </div>
-        <h1 className="text-3xl font-bold mb-4">Welcome to PromptKeeper</h1>
-        <p className="text-lg">Start managing your prompts efficiently!</p>
+        <div className="px-8">
+          <h1 className="text-3xl font-bold mb-4">Welcome to PromptKeeper</h1>
+          <p className="text-lg">Start managing your prompts efficiently!</p>
+          {/* Add more content here */}
+        </div>
       </main>
     </div>
   );
