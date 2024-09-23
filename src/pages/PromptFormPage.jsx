@@ -5,6 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { savePrompt } from '../utils/indexedDB';
+import { secureStore } from '../utils/secureStorage';
 import { toast } from 'sonner';
 import { ArrowLeft } from 'lucide-react';
 
@@ -16,9 +17,17 @@ const PromptFormPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (location.state && location.state.initialPrompt !== undefined) {
-      setPrompt(location.state.initialPrompt);
-    }
+    const loadDefaultPrompt = async () => {
+      if (location.state && location.state.initialPrompt !== undefined) {
+        setPrompt(location.state.initialPrompt);
+      } else {
+        const defaultPrompt = await secureStore.getItem('defaultPrompt');
+        if (defaultPrompt) {
+          setPrompt(defaultPrompt);
+        }
+      }
+    };
+    loadDefaultPrompt();
   }, [location.state]);
 
   const handleSubmit = async (e) => {
