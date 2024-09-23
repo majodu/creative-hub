@@ -3,7 +3,7 @@ import Sidebar from '../components/Sidebar';
 import SearchBar from '../components/SearchBar';
 import TabNavigation from '../components/TabNavigation';
 import PromptGrid from '../components/PromptGrid';
-import ChatInput from '../components/ChatInput';
+import GeneratePromptButton from '../components/GeneratePromptButton';
 
 const Index = () => {
   const samplePrompts = [
@@ -56,7 +56,7 @@ const Index = () => {
           <TabNavigation />
         </div>
         <PromptGrid prompts={samplePrompts} />
-        <ChatInput />
+        <GeneratePromptButton />
       </main>
     </div>
   );
