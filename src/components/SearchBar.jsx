@@ -1,13 +1,19 @@
 import React, { useState } from 'react';
 import { Command } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const SearchBar = ({ onSearch }) => {
   const [searchTerm, setSearchTerm] = useState('');
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const term = e.target.value;
     setSearchTerm(term);
     onSearch(term);
+  };
+
+  const handleAddTemplate = () => {
+    navigate('/new-prompt', { state: { initialPrompt: '' } });
   };
 
   return (
@@ -29,7 +35,10 @@ const SearchBar = ({ onSearch }) => {
           className="bg-transparent w-full text-xs text-gray-700 placeholder-gray-400 focus:outline-none"
         />
       </div>
-      <button className="bg-black text-white px-4 py-1 rounded-lg text-sm font-bold hover:bg-gray-800 transition-colors">
+      <button 
+        onClick={handleAddTemplate}
+        className="bg-black text-white px-4 py-1 rounded-lg text-sm font-bold hover:bg-gray-800 transition-colors"
+      >
         Add template
       </button>
     </div>

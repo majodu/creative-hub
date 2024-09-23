@@ -16,7 +16,7 @@ const PromptFormPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (location.state && location.state.initialPrompt) {
+    if (location.state && location.state.initialPrompt !== undefined) {
       setPrompt(location.state.initialPrompt);
     }
   }, [location.state]);
@@ -28,7 +28,7 @@ const PromptFormPage = () => {
         title,
         prompt,
         tags: tags.split(',').map(tag => tag.trim()),
-        bookmarked: false // Set default value to false
+        bookmarked: false
       });
       toast.success('Prompt saved successfully!');
       navigate('/');
