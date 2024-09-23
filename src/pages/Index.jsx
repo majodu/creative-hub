@@ -56,16 +56,18 @@ const Index = () => {
             variant="ghost"
             size="sm"
             onClick={toggleBookmarkFilter}
-            className={`flex items-center space-x-2 text-xs ${showBookmarked ? 'text-blue-500' : 'text-gray-500'}`}
+            className="text-xs text-gray-500 hover:text-gray-700"
           >
-            <BookmarkIcon className="h-3 w-3" />
+            <BookmarkIcon className="h-3 w-3 mr-1" />
             <span>{showBookmarked ? "Show All" : "Show Bookmarked"}</span>
           </Button>
-          <ExportWidget 
-            selectedPrompts={selectedPrompts} 
-            prompts={prompts}
-            className="text-xs text-gray-500 hover:text-gray-700"
-          />
+          {selectedPrompts.length > 0 && (
+            <ExportWidget 
+              selectedPrompts={selectedPrompts} 
+              prompts={prompts}
+              className="text-xs text-gray-500 hover:text-gray-700"
+            />
+          )}
         </div>
         <PromptGrid 
           prompts={filteredPrompts} 

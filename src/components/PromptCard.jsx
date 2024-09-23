@@ -5,6 +5,7 @@ import { updatePrompt } from '../utils/indexedDB';
 import { toast } from 'sonner';
 import { truncateText } from '../utils/textUtils';
 import { useNavigate } from 'react-router-dom';
+import { Checkbox } from "@/components/ui/checkbox";
 
 const PromptCard = ({ id, title, prompt, likes, tags, bookmarked, onSelect, isSelected }) => {
   const queryClient = useQueryClient();
@@ -43,7 +44,15 @@ const PromptCard = ({ id, title, prompt, likes, tags, bookmarked, onSelect, isSe
       onClick={handleCardClick}
     >
       <div className="flex justify-between items-start">
-        <h2 className="text-lg font-semibold text-gray-900">{title}</h2>
+        <div className="flex items-center">
+          <Checkbox
+            checked={isSelected}
+            onCheckedChange={() => onSelect(id)}
+            onClick={(e) => e.stopPropagation()}
+            className="mr-2"
+          />
+          <h2 className="text-lg font-semibold text-gray-900">{title}</h2>
+        </div>
         <div className="flex space-x-2">
           <button 
             className={`text-gray-400 hover:text-gray-600 ${bookmarked ? 'text-blue-500' : ''}`}
@@ -55,12 +64,6 @@ const PromptCard = ({ id, title, prompt, likes, tags, bookmarked, onSelect, isSe
             ) : (
               <Bookmark className="h-4 w-4" />
             )}
-          </button>
-          <button 
-            className={`text-gray-400 hover:text-gray-600 ${isSelected ? 'text-green-500' : ''}`}
-            onClick={handleSelect}
-          >
-            <Check className="h-4 w-4" />
           </button>
         </div>
       </div>
