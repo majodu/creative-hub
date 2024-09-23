@@ -4,7 +4,6 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { Checkbox } from "@/components/ui/checkbox";
 import { savePrompt } from '../utils/indexedDB';
 import { toast } from 'sonner';
 import { ArrowLeft } from 'lucide-react';
@@ -13,7 +12,6 @@ const PromptFormPage = () => {
   const [title, setTitle] = useState('');
   const [prompt, setPrompt] = useState('');
   const [tags, setTags] = useState('');
-  const [bookmarked, setBookmarked] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -30,7 +28,7 @@ const PromptFormPage = () => {
         title,
         prompt,
         tags: tags.split(',').map(tag => tag.trim()),
-        bookmarked
+        bookmarked: false // Set default value to false
       });
       toast.success('Prompt saved successfully!');
       navigate('/');
@@ -84,14 +82,6 @@ const PromptFormPage = () => {
             onChange={(e) => setTags(e.target.value)}
             placeholder="Enter tags separated by commas"
           />
-        </div>
-        <div className="flex items-center space-x-2">
-          <Checkbox
-            id="bookmarked"
-            checked={bookmarked}
-            onCheckedChange={setBookmarked}
-          />
-          <Label htmlFor="bookmarked">Bookmark</Label>
         </div>
         <Button type="submit">Save Prompt Template</Button>
       </form>
