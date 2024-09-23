@@ -33,7 +33,11 @@ export const getPromptById = async (id) => {
 
 export const updatePrompt = async (prompt) => {
   const db = await initDB();
-  return db.put(storeName, prompt);
+  const existingPrompt = await db.get(storeName, prompt.id);
+  if (!existingPrompt) {
+    throw new Error('Prompt not found');
+  }
+  return db.put(storeName, { ...existingPrompt, ...prompt });
 };
 
 export const deletePrompt = async (id) => {

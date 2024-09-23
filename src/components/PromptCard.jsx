@@ -1,14 +1,38 @@
 import React from 'react';
 import { ThumbsUp, Bookmark, Star } from 'lucide-react';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { updatePrompt } from '../utils/indexedDB';
+import { toast } from 'sonner';
 
-const PromptCard = ({ title, prompt, likes, tags, bookmarked }) => {
+const PromptCard = ({ id, title, prompt, likes, tags, bookmarked }) => {
+  const queryClient = useQueryClient();
+
+  const bookmarkMutation = useMutation({
+    mutationFn: (newBookmarkStatus) => updatePrompt({ id, bookmarked: newBookmarkStatus }),
+    onSuccess: () => {
+      queryClient.invalidateQueries(['prompts']);
+      toast.success(bookmarked ? 'Prompt unbookmarked' : 'Prompt bookmarked');
+    },
+    onError: () => {
+      toast.error('Failed to update bookmark status');
+    },
+  });
+
+  const handleBookmark = () => {
+    bookmarkMutation.mutate(!bookmarked);
+  };
+
   return (
     <div className="bg-white p-3 rounded-lg shadow-sm">
       <div className="flex justify-between items-start">
         <h2 className="text-lg font-semibold text-gray-900">{title}</h2>
         <div className="flex items-center space-x-2">
           {bookmarked && <Star className="h-4 w-4 text-yellow-400 fill-current" />}
-          <button className="text-gray-400 hover:text-gray-600">
+          <button 
+            className={`text-gray-400 hover:text-gray-600 ${bookmarked ? 'text-yellow-400' : ''}`}
+            onClick={handleBookmark}
+            disabled={bookmarkMutation.isLoading}
+          >
             <Bookmark className="h-4 w-4" />
           </button>
         </div>
