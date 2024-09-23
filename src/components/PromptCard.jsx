@@ -1,13 +1,13 @@
 import React from 'react';
 import { ThumbsUp, Bookmark, Star } from 'lucide-react';
 
-const PromptCard = ({ title, prompt, likes, tags, isFavorited }) => {
+const PromptCard = ({ title, prompt, likes, tags, bookmarked }) => {
   return (
     <div className="bg-white p-3 rounded-lg shadow-sm">
       <div className="flex justify-between items-start">
         <h2 className="text-lg font-semibold text-gray-900">{title}</h2>
         <div className="flex items-center space-x-2">
-          {isFavorited && <Star className="h-4 w-4 text-yellow-400 fill-current" />}
+          {bookmarked && <Star className="h-4 w-4 text-yellow-400 fill-current" />}
           <button className="text-gray-400 hover:text-gray-600">
             <Bookmark className="h-4 w-4" />
           </button>

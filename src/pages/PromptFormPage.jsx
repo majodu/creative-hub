@@ -13,7 +13,7 @@ const PromptFormPage = () => {
   const [title, setTitle] = useState('');
   const [prompt, setPrompt] = useState('');
   const [tags, setTags] = useState('');
-  const [isFavorited, setIsFavorited] = useState(false);
+  const [bookmarked, setBookmarked] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -30,7 +30,7 @@ const PromptFormPage = () => {
         title,
         prompt,
         tags: tags.split(',').map(tag => tag.trim()),
-        isFavorited
+        bookmarked
       });
       toast.success('Prompt saved successfully!');
       navigate('/');
@@ -87,11 +87,11 @@ const PromptFormPage = () => {
         </div>
         <div className="flex items-center space-x-2">
           <Checkbox
-            id="isFavorited"
-            checked={isFavorited}
-            onCheckedChange={setIsFavorited}
+            id="bookmarked"
+            checked={bookmarked}
+            onCheckedChange={setBookmarked}
           />
-          <Label htmlFor="isFavorited">Favorite</Label>
+          <Label htmlFor="bookmarked">Bookmark</Label>
         </div>
         <Button type="submit">Save Prompt Template</Button>
       </form>
