@@ -10,6 +10,7 @@ import { toast } from 'sonner';
 import { ArrowLeft } from 'lucide-react';
 import PromptVersionControl from '../components/PromptVersionControl';
 import DiffIndicator from '../components/DiffIndicator';
+import DiffModal from '../components/DiffModal';
 
 const EditPromptPage = () => {
   const { id } = useParams();
@@ -21,6 +22,8 @@ const EditPromptPage = () => {
   const [tags, setTags] = useState('');
   const [versions, setVersions] = useState([]);
   const [currentVersionIndex, setCurrentVersionIndex] = useState(0);
+  const [isDiffModalOpen, setIsDiffModalOpen] = useState(false);
+  const [currentDiffs, setCurrentDiffs] = useState([]);
 
   const { data: promptData, isLoading, error } = useQuery({
     queryKey: ['prompt', id],
@@ -72,6 +75,11 @@ const EditPromptPage = () => {
     setPrompt(versions[newIndex]);
   };
 
+  const handleViewChanges = (diffs) => {
+    setCurrentDiffs(diffs);
+    setIsDiffModalOpen(true);
+  };
+
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error loading prompt: {error.message}</div>;
 
@@ -118,6 +126,7 @@ const EditPromptPage = () => {
             <DiffIndicator
               oldText={versions[currentVersionIndex - 1]}
               newText={versions[currentVersionIndex]}
+              onViewChanges={handleViewChanges}
             />
           )}
         </div>
@@ -132,6 +141,11 @@ const EditPromptPage = () => {
         </div>
         <Button type="submit">Update Prompt Template</Button>
       </form>
+      <DiffModal
+        isOpen={isDiffModalOpen}
+        onClose={() => setIsDiffModalOpen(false)}
+        diffs={currentDiffs}
+      />
     </div>
   );
 };
