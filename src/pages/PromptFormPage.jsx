@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { savePrompt } from '../utils/indexedDB';
 import { toast } from 'sonner';
+import { ArrowLeft } from 'lucide-react';
 
 const PromptFormPage = () => {
   const [title, setTitle] = useState('');
@@ -39,8 +40,19 @@ const PromptFormPage = () => {
     }
   };
 
+  const handleBack = () => {
+    navigate('/');
+  };
+
   return (
     <div className="p-6 max-w-2xl mx-auto">
+      <Button
+        variant="ghost"
+        onClick={handleBack}
+        className="mb-4"
+      >
+        <ArrowLeft className="mr-2 h-4 w-4" /> Back
+      </Button>
       <h1 className="text-2xl font-bold mb-6">New Prompt Template</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
