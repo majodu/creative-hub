@@ -23,6 +23,8 @@ const PromptCard = ({ id, title, prompt, likes, tags, bookmarked }) => {
     bookmarkMutation.mutate(!bookmarked);
   };
 
+  const shouldShowTags = tags.length > 1 || (tags.length === 1 && tags[0] !== '');
+
   return (
     <div className="bg-white p-3 rounded-lg shadow-sm border border-gray-200">
       <div className="flex justify-between items-start">
@@ -45,16 +47,18 @@ const PromptCard = ({ id, title, prompt, likes, tags, bookmarked }) => {
           <Share className="h-3 w-3" />
           <span>{likes}</span>
         </button>
-        <div className="flex space-x-2">
-          {tags.map((tag, index) => (
-            <button
-              key={index}
-              className="px-1.5 py-0.5 text-[10px] font-medium text-gray-600 bg-white border border-gray-300 rounded-md hover:bg-gray-100"
-            >
-              {tag}
-            </button>
-          ))}
-        </div>
+        {shouldShowTags && (
+          <div className="flex space-x-2">
+            {tags.map((tag, index) => (
+              <button
+                key={index}
+                className="px-1.5 py-0.5 text-[10px] font-medium text-gray-600 bg-white border border-gray-300 rounded-md hover:bg-gray-100"
+              >
+                {tag}
+              </button>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
