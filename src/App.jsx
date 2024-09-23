@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Sidebar from "./components/Sidebar";
 import Index from "./pages/Index";
 import PromptFormPage from "./pages/PromptFormPage";
+import EditPromptPage from "./pages/EditPromptPage";
 
 const queryClient = new QueryClient();
 
@@ -19,6 +20,7 @@ const App = () => (
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/new-prompt" element={<PromptFormPage />} />
+              <Route path="/edit-prompt/:id" element={<EditPromptPage />} />
             </Routes>
           </main>
         </div>
