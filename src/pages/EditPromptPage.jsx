@@ -107,13 +107,22 @@ const EditPromptPage = () => {
 
   return (
     <div className="p-6 max-w-2xl mx-auto">
-      <Button
-        variant="ghost"
-        onClick={handleBack}
-        className="mb-4"
-      >
-        <ArrowLeft className="mr-2 h-4 w-4" /> Back
-      </Button>
+      <div className="flex justify-between items-center mb-4">
+        <Button
+          variant="ghost"
+          onClick={handleBack}
+        >
+          <ArrowLeft className="mr-2 h-4 w-4" /> Back
+        </Button>
+        <Button
+          variant="ghost"
+          size="icon"
+          className="text-red-500 hover:text-red-700 hover:bg-red-100"
+          onClick={handleDelete}
+        >
+          <Trash2 className="h-5 w-5" />
+        </Button>
+      </div>
       <h1 className="text-2xl font-bold mb-6">Edit Prompt Template</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
@@ -141,14 +150,8 @@ const EditPromptPage = () => {
           <PromptVersionControl
             currentVersion={currentVersionIndex + 1}
             totalVersions={versions.length}
-            onPrevious={(e) => {
-              e.preventDefault();
-              handleVersionChange(Math.max(0, currentVersionIndex - 1));
-            }}
-            onNext={(e) => {
-              e.preventDefault();
-              handleVersionChange(Math.min(versions.length - 1, currentVersionIndex + 1));
-            }}
+            onPrevious={() => handleVersionChange(Math.max(0, currentVersionIndex - 1))}
+            onNext={() => handleVersionChange(Math.min(versions.length - 1, currentVersionIndex + 1))}
           />
           {currentVersionIndex > 0 && (
             <DiffIndicator
@@ -167,12 +170,7 @@ const EditPromptPage = () => {
             placeholder="Enter tags separated by commas"
           />
         </div>
-        <div className="flex justify-between">
-          <Button type="submit">Update Prompt Template</Button>
-          <Button type="button" variant="destructive" onClick={handleDelete}>
-            <Trash2 className="mr-2 h-4 w-4" /> Delete Prompt
-          </Button>
-        </div>
+        <Button type="submit">Update Prompt Template</Button>
       </form>
       <DiffModal
         isOpen={isDiffModalOpen}
