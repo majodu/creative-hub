@@ -2,15 +2,47 @@ import React from 'react';
 import Sidebar from '../components/Sidebar';
 import SearchBar from '../components/SearchBar';
 import TabNavigation from '../components/TabNavigation';
-import PromptCard from '../components/PromptCard';
+import PromptGrid from '../components/PromptGrid';
 
 const Index = () => {
-  const samplePrompt = {
-    title: "Blog Intro",
-    description: "Let's start with a compelling intro that hooks your readers from the get-go and kick your blog up a notch!",
-    likes: 34,
-    tags: ["Branding", "Marketing"]
-  };
+  const samplePrompts = [
+    {
+      title: "Blog Intro",
+      description: "Let's start with a compelling intro that hooks your readers from the get-go and kick your blog up a notch!",
+      likes: 34,
+      tags: ["Branding", "Marketing"]
+    },
+    {
+      title: "Product Description",
+      description: "Create an engaging product description that highlights key features and benefits.",
+      likes: 28,
+      tags: ["E-commerce", "Copywriting"]
+    },
+    {
+      title: "Social Media Post",
+      description: "Craft a catchy social media post that drives engagement and increases followers.",
+      likes: 42,
+      tags: ["Social Media", "Marketing"]
+    },
+    {
+      title: "Email Subject Line",
+      description: "Generate attention-grabbing email subject lines to improve open rates.",
+      likes: 19,
+      tags: ["Email Marketing", "Copywriting"]
+    },
+    {
+      title: "SEO Meta Description",
+      description: "Write an optimized meta description to improve click-through rates from search results.",
+      likes: 31,
+      tags: ["SEO", "Web Content"]
+    },
+    {
+      title: "Video Script Outline",
+      description: "Create a structured outline for an informative and engaging video script.",
+      likes: 23,
+      tags: ["Video Content", "Scriptwriting"]
+    }
+  ];
 
   return (
     <div className="flex">
@@ -22,10 +54,7 @@ const Index = () => {
         <div className="mb-8">
           <TabNavigation />
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <PromptCard {...samplePrompt} />
-          {/* You can add more PromptCards here */}
-        </div>
+        <PromptGrid prompts={samplePrompts} />
       </main>
     </div>
   );
