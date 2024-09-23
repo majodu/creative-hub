@@ -1,5 +1,4 @@
 import React from 'react';
-import Sidebar from '../components/Sidebar';
 import SearchBar from '../components/SearchBar';
 import TabNavigation from '../components/TabNavigation';
 import PromptGrid from '../components/PromptGrid';
@@ -46,20 +45,17 @@ const Index = () => {
   ];
 
   return (
-    <div className="flex">
-      <Sidebar />
-      <main className="flex-1 p-6 relative">
-        <div className="mb-2 w-full">
-          <SearchBar />
-        </div>
-        <div className="mb-2">
-          <TabNavigation />
-        </div>
-        <PromptGrid prompts={samplePrompts} />
-        <div className="h-20"></div> {/* Spacer for ChatInput */}
-        <ChatInput />
-      </main>
-    </div>
+    <main className="flex-1 p-6 relative">
+      <div className="mb-2 w-full">
+        <SearchBar />
+      </div>
+      <div className="mb-2">
+        <TabNavigation />
+      </div>
+      <PromptGrid prompts={samplePrompts} />
+      <div className="h-20"></div> {/* Spacer for ChatInput */}
+      <ChatInput />
+    </main>
   );
 };
 
