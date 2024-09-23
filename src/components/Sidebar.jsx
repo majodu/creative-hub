@@ -17,9 +17,9 @@ const Sidebar = () => {
 
       {/* User Profile Card */}
       <div className="bg-white rounded-lg p-3 mb-4 flex items-center">
-        <img src="/placeholder.svg" alt="Erin George" className="w-10 h-10 rounded-full mr-3" />
+        <img src="/placeholder.svg" alt="John Doe" className="w-10 h-10 rounded-full mr-3" />
         <div>
-          <h3 className="text-base font-medium">Erin George</h3>
+          <h3 className="text-base font-medium">John Doe</h3>
           <p className="text-xs text-gray-500">Main user</p>
         </div>
       </div>
