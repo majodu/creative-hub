@@ -27,7 +27,7 @@ const DiffIndicator = ({ oldText, newText, onViewChanges }) => {
           ))}
         </div>
       </div>
-      <Button variant="outline" size="sm" onClick={() => onViewChanges(differences)}>
+      <Button variant="outline" size="sm" onClick={onViewChanges}>
         View Changes
       </Button>
     </div>

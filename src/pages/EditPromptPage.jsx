@@ -75,7 +75,9 @@ const EditPromptPage = () => {
     setPrompt(versions[newIndex]);
   };
 
-  const handleViewChanges = (diffs) => {
+  const handleViewChanges = (e) => {
+    e.preventDefault(); // Prevent form submission
+    const diffs = compareTexts(versions[currentVersionIndex - 1], versions[currentVersionIndex]);
     setCurrentDiffs(diffs);
     setIsDiffModalOpen(true);
   };
