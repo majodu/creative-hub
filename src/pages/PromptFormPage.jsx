@@ -17,7 +17,7 @@ const PromptFormPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const loadDefaultPrompt = async () => {
+    const loadInitialPrompt = async () => {
       if (location.state && location.state.initialPrompt !== undefined) {
         setPrompt(location.state.initialPrompt);
       } else {
@@ -27,7 +27,7 @@ const PromptFormPage = () => {
         }
       }
     };
-    loadDefaultPrompt();
+    loadInitialPrompt();
   }, [location.state]);
 
   const handleSubmit = async (e) => {
