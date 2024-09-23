@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home, FolderTree, Activity, Settings, Archive, Plus, Chrome, Safari, Code } from 'lucide-react';
+import { Home, FolderTree, Activity, Settings, Archive, Plus, Chrome, Globe, Code } from 'lucide-react';
 
 const Sidebar = () => {
   return (
@@ -76,8 +76,8 @@ const Sidebar = () => {
           </li>
           <li>
             <a href="#" className="flex items-center text-gray-700 hover:text-black">
-              <Safari className="w-5 h-5 mr-3" />
-              <span>Safari plugin</span>
+              <Globe className="w-5 h-5 mr-3" />
+              <span>Web plugin</span>
             </a>
           </li>
           <li>
