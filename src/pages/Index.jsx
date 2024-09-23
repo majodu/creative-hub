@@ -51,7 +51,7 @@ const Index = () => {
         <div className="mb-2">
           <SearchBar />
         </div>
-        <div className="mb-8">
+        <div className="mb-2">
           <TabNavigation />
         </div>
         <PromptGrid prompts={samplePrompts} />
