@@ -1,7 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Command } from 'lucide-react';
 
-const SearchBar = () => {
+const SearchBar = ({ onSearch }) => {
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const handleInputChange = (e) => {
+    const term = e.target.value;
+    setSearchTerm(term);
+    onSearch(term);
+  };
+
   return (
     <div className="flex items-center justify-between w-full bg-[#f5f5f5] rounded-lg h-10 px-2">
       <div className="flex items-center flex-1">
@@ -15,6 +23,8 @@ const SearchBar = () => {
         </div>
         <input
           type="text"
+          value={searchTerm}
+          onChange={handleInputChange}
           placeholder="Search for template"
           className="bg-transparent w-full text-xs text-gray-700 placeholder-gray-400 focus:outline-none"
         />

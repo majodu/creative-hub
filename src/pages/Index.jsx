@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import SearchBar from '../components/SearchBar';
 import TabNavigation from '../components/TabNavigation';
 import PromptGrid from '../components/PromptGrid';
 import ChatInput from '../components/ChatInput';
 
 const Index = () => {
+  const [searchTerm, setSearchTerm] = useState('');
   const samplePrompts = [
     {
       title: "Blog Intro",
@@ -44,16 +45,25 @@ const Index = () => {
     }
   ];
 
+  const filteredPrompts = samplePrompts.filter(prompt => 
+    prompt.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    prompt.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()))
+  );
+
+  const handleSearch = (term) => {
+    setSearchTerm(term);
+  };
+
   return (
     <main className="flex-1 flex flex-col h-full">
       <div className="flex-grow overflow-auto p-6">
         <div className="mb-2 w-full">
-          <SearchBar />
+          <SearchBar onSearch={handleSearch} />
         </div>
         <div className="mb-2">
           <TabNavigation />
         </div>
-        <PromptGrid prompts={samplePrompts} />
+        <PromptGrid prompts={filteredPrompts} />
       </div>
       <div className="p-6 bg-white border-t">
         <ChatInput />
