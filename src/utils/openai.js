@@ -12,23 +12,30 @@ export const generateOpenAIResponse = async (userInput) => {
 
   const fullPrompt = `${defaultPrompt}\n\nUser: ${userInput}`;
 
-  const response = await fetch(OPENAI_API_URL, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${apiKey}`
-    },
-    body: JSON.stringify({
-      model: 'gpt-3.5-turbo',
-      messages: [{ role: 'user', content: fullPrompt }],
-      max_tokens: 150
-    })
-  });
+  try {
+    const response = await fetch(OPENAI_API_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${apiKey}`
+      },
+      body: JSON.stringify({
+        model: 'gpt-3.5-turbo',
+        messages: [{ role: 'user', content: fullPrompt }],
+        max_tokens: 150
+      })
+    });
 
-  if (!response.ok) {
-    throw new Error('Failed to generate response from OpenAI');
+    if (!response.ok) {
+      if (response.status === 401) {
+        throw new Error('Invalid OpenAI API key. Please check your API key in the Settings page.');
+      }
+      throw new Error('Failed to generate response from OpenAI');
+    }
+
+    const data = await response.json();
+    return data.choices[0].message.content.trim();
+  } catch (error) {
+    throw error;
   }
-
-  const data = await response.json();
-  return data.choices[0].message.content.trim();
 };

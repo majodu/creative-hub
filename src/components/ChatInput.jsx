@@ -17,7 +17,23 @@ const ChatInput = () => {
         navigate('/new-prompt', { state: { initialPrompt: generatedResponse } });
       } catch (error) {
         console.error('Error generating response:', error);
-        toast.error(error.message || 'Failed to generate response');
+        if (error.message.includes('API key not found')) {
+          toast.error('OpenAI API key not found. Please set it in the Settings page.', {
+            action: {
+              label: 'Go to Settings',
+              onClick: () => navigate('/settings')
+            }
+          });
+        } else if (error.message.includes('Invalid OpenAI API key')) {
+          toast.error('Invalid OpenAI API key. Please check your API key in the Settings page.', {
+            action: {
+              label: 'Go to Settings',
+              onClick: () => navigate('/settings')
+            }
+          });
+        } else {
+          toast.error(error.message || 'Failed to generate response');
+        }
       } finally {
         setIsLoading(false);
       }
