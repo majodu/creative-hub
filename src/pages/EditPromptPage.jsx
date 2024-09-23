@@ -106,12 +106,14 @@ const EditPromptPage = () => {
             required
           />
         </div>
-        <PromptVersionControl
-          currentVersion={currentVersionIndex + 1}
-          totalVersions={versions.length}
-          onPrevious={() => handleVersionChange(Math.max(0, currentVersionIndex - 1))}
-          onNext={() => handleVersionChange(Math.min(versions.length - 1, currentVersionIndex + 1))}
-        />
+        <div className="mt-1 mb-4">
+          <PromptVersionControl
+            currentVersion={currentVersionIndex + 1}
+            totalVersions={versions.length}
+            onPrevious={() => handleVersionChange(Math.max(0, currentVersionIndex - 1))}
+            onNext={() => handleVersionChange(Math.min(versions.length - 1, currentVersionIndex + 1))}
+          />
+        </div>
         <div>
           <Label htmlFor="tags">Tags</Label>
           <Input
