@@ -18,6 +18,7 @@ export const savePrompt = async (promptData) => {
   return db.add(storeName, {
     ...promptData,
     createdAt: new Date().toISOString(),
+    versions: [promptData.prompt],
   });
 };
 
@@ -37,7 +38,12 @@ export const updatePrompt = async (prompt) => {
   if (!existingPrompt) {
     throw new Error('Prompt not found');
   }
-  return db.put(storeName, { ...existingPrompt, ...prompt });
+  const updatedPrompt = {
+    ...existingPrompt,
+    ...prompt,
+    versions: prompt.versions || [...(existingPrompt.versions || []), prompt.prompt],
+  };
+  return db.put(storeName, updatedPrompt);
 };
 
 export const deletePrompt = async (id) => {

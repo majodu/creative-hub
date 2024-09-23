@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label";
 import { getPromptById, updatePrompt } from '../utils/indexedDB';
 import { toast } from 'sonner';
 import { ArrowLeft } from 'lucide-react';
+import PromptVersionControl from '../components/PromptVersionControl';
 
 const EditPromptPage = () => {
   const { id } = useParams();
@@ -17,6 +18,8 @@ const EditPromptPage = () => {
   const [title, setTitle] = useState('');
   const [prompt, setPrompt] = useState('');
   const [tags, setTags] = useState('');
+  const [versions, setVersions] = useState([]);
+  const [currentVersionIndex, setCurrentVersionIndex] = useState(0);
 
   const { data: promptData, isLoading, error } = useQuery({
     queryKey: ['prompt', id],
@@ -28,6 +31,8 @@ const EditPromptPage = () => {
       setTitle(promptData.title);
       setPrompt(promptData.prompt);
       setTags(promptData.tags.join(', '));
+      setVersions(promptData.versions || [promptData.prompt]);
+      setCurrentVersionIndex(promptData.versions ? promptData.versions.length - 1 : 0);
     }
   }, [promptData]);
 
@@ -47,16 +52,23 @@ const EditPromptPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const newVersions = [...versions, prompt];
     updatePromptMutation.mutate({
       id: parseInt(id),
       title,
       prompt,
       tags: tags.split(',').map(tag => tag.trim()),
+      versions: newVersions,
     });
   };
 
   const handleBack = () => {
     navigate('/');
+  };
+
+  const handleVersionChange = (newIndex) => {
+    setCurrentVersionIndex(newIndex);
+    setPrompt(versions[newIndex]);
   };
 
   if (isLoading) return <div>Loading...</div>;
@@ -94,6 +106,12 @@ const EditPromptPage = () => {
             required
           />
         </div>
+        <PromptVersionControl
+          currentVersion={currentVersionIndex + 1}
+          totalVersions={versions.length}
+          onPrevious={() => handleVersionChange(Math.max(0, currentVersionIndex - 1))}
+          onNext={() => handleVersionChange(Math.min(versions.length - 1, currentVersionIndex + 1))}
+        />
         <div>
           <Label htmlFor="tags">Tags</Label>
           <Input
