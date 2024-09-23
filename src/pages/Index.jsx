@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import SearchBar from '../components/SearchBar';
-import TabNavigation from '../components/TabNavigation';
 import PromptGrid from '../components/PromptGrid';
 import ChatInput from '../components/ChatInput';
 import { getAllPrompts } from '../utils/indexedDB';
@@ -33,9 +32,6 @@ const Index = () => {
       <div className="flex-grow overflow-auto p-6">
         <div className="mb-2 w-full">
           <SearchBar onSearch={handleSearch} />
-        </div>
-        <div className="mb-2">
-          <TabNavigation />
         </div>
         <PromptGrid prompts={filteredPrompts} />
       </div>
