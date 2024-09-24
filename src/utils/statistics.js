@@ -20,7 +20,6 @@ export const getStats = async () => {
     stats = {
       id: 'appStats',
       promptsCreated: 0,
-      promptsShared: 0,
       apiCallsMade: 0,
       promptsUsed: 0,
     };
@@ -36,7 +35,6 @@ const updateStat = async (statName) => {
   const stats = await store.get('appStats') || {
     id: 'appStats',
     promptsCreated: 0,
-    promptsShared: 0,
     apiCallsMade: 0,
     promptsUsed: 0,
   };
@@ -46,6 +44,5 @@ const updateStat = async (statName) => {
 };
 
 export const incrementPromptsCreated = () => updateStat('promptsCreated');
-export const incrementPromptsShared = () => updateStat('promptsShared');
 export const incrementApiCallsMade = () => updateStat('apiCallsMade');
 export const incrementPromptsUsed = () => updateStat('promptsUsed');

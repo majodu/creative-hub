@@ -1,5 +1,5 @@
 import React from 'react';
-import { Share, Bookmark, BookmarkCheck, Copy } from 'lucide-react';
+import { Bookmark, BookmarkCheck, Copy } from 'lucide-react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { updatePrompt } from '../utils/indexedDB';
 import { toast } from 'sonner';
@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 
-const PromptCard = ({ id, title, prompt, likes, tags, bookmarked, onSelect, isSelected }) => {
+const PromptCard = ({ id, title, prompt, tags, bookmarked, onSelect, isSelected }) => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
@@ -30,11 +30,6 @@ const PromptCard = ({ id, title, prompt, likes, tags, bookmarked, onSelect, isSe
 
   const handleCardClick = () => {
     navigate(`/edit-prompt/${id}`);
-  };
-
-  const handleSelect = (e) => {
-    e.stopPropagation();
-    onSelect(id);
   };
 
   const handleCopy = (e) => {
@@ -88,24 +83,18 @@ const PromptCard = ({ id, title, prompt, likes, tags, bookmarked, onSelect, isSe
         </div>
       </div>
       <p className="mt-1 text-xs text-gray-600">{truncateText(prompt, 100)}</p>
-      <div className="mt-3 flex items-center justify-between">
-        <button className="flex items-center space-x-1 text-xs text-gray-600 hover:text-gray-800">
-          <Share className="h-3 w-3" />
-          <span>{likes}</span>
-        </button>
-        {shouldShowTags && (
-          <div className="flex space-x-2">
-            {tags.map((tag, index) => (
-              <span
-                key={index}
-                className="px-1.5 py-0.5 text-[10px] font-medium text-gray-600 bg-white border border-gray-300 rounded-md"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-        )}
-      </div>
+      {shouldShowTags && (
+        <div className="mt-3 flex space-x-2">
+          {tags.map((tag, index) => (
+            <span
+              key={index}
+              className="px-1.5 py-0.5 text-[10px] font-medium text-gray-600 bg-white border border-gray-300 rounded-md"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

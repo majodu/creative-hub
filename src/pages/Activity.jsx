@@ -15,7 +15,6 @@ const Activity = () => {
 
   const chartData = stats ? [
     { name: 'Prompts Created', value: stats.promptsCreated || 0 },
-    { name: 'Prompts Shared', value: stats.promptsShared || 0 },
     { name: 'API Calls Made', value: stats.apiCallsMade || 0 },
     { name: 'Prompts Used', value: stats.promptsUsed || 0 },
   ] : [];
@@ -25,7 +24,7 @@ const Activity = () => {
       <h1 className="text-2xl font-bold mb-6">Activity Statistics</h1>
       {stats ? (
         <>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
             {chartData.map((item) => (
               <Card key={item.name}>
                 <CardHeader>
