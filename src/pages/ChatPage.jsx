@@ -51,7 +51,7 @@ const ChatPage = () => {
         {messages.map((message, index) => (
           <div key={index} className={`mb-4 ${message.role === 'user' ? 'text-right' : 'text-left'}`}>
             <div className={`inline-block p-2 rounded-lg ${message.role === 'user' ? 'bg-blue-500 text-white' : 'bg-gray-200'} max-w-[80%]`}>
-              <ReactMarkdown className="markdown-content">
+              <ReactMarkdown className="prose prose-sm dark:prose-invert">
                 {message.content}
               </ReactMarkdown>
             </div>
