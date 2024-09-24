@@ -11,6 +11,7 @@ import UsePromptPage from "./pages/UsePromptPage";
 import Settings from "./pages/Settings";
 import Archive from "./pages/Archive";
 import ChatPage from "./pages/ChatPage";
+import Activity from "./pages/Activity";
 
 const queryClient = new QueryClient();
 
@@ -31,6 +32,7 @@ const App = () => (
                 <Route path="/settings" element={<Settings />} />
                 <Route path="/archive" element={<Archive />} />
                 <Route path="/chat" element={<ChatPage />} />
+                <Route path="/activity" element={<Activity />} />
               </Routes>
             </main>
           </div>

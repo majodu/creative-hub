@@ -8,6 +8,7 @@ import { generateOpenAIResponseForChatPage } from '../utils/openai';
 import { toast } from 'sonner';
 import ReactMarkdown from 'react-markdown';
 import { Copy } from 'lucide-react';
+import { incrementChatMessagesSent } from '../utils/statistics';
 
 const ChatPage = () => {
   const location = useLocation();
@@ -42,6 +43,7 @@ const ChatPage = () => {
     setMessages(prev => [...prev, userMessage]);
     setInput('');
 
+    await incrementChatMessagesSent();
     chatMutation.mutate(input);
   };
 

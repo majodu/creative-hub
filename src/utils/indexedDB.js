@@ -1,4 +1,5 @@
 import { openDB } from 'idb';
+import { incrementPromptsCreated, incrementPromptsShared, incrementPromptsUsed } from './statistics';
 
 const dbName = 'PromptKeeperDB';
 const storeName = 'prompts';
@@ -19,12 +20,14 @@ const initDB = async () => {
 
 export const savePrompt = async (promptData) => {
   const db = await initDB();
-  return db.add(storeName, {
+  const result = await db.add(storeName, {
     ...promptData,
     createdAt: new Date().toISOString(),
     versions: [promptData.prompt],
     archivedAt: null,
   });
+  await incrementPromptsCreated();
+  return result;
 };
 
 export const getAllPrompts = async (includeArchived = false) => {
@@ -94,4 +97,14 @@ export const getArchivedPrompts = async (searchTerm = '') => {
 export const deletePrompt = async (id) => {
   const db = await initDB();
   return db.delete(storeName, id);
+};
+
+export const sharePrompt = async (id) => {
+  // Implement sharing logic here
+  await incrementPromptsShared();
+};
+
+export const usePrompt = async (id) => {
+  // Implement prompt usage logic here
+  await incrementPromptsUsed();
 };
