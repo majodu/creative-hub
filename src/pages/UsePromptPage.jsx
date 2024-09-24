@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import { getPromptById } from '../utils/indexedDB';
 import { ArrowLeft } from 'lucide-react';
 
@@ -12,6 +13,7 @@ const UsePromptPage = () => {
   const navigate = useNavigate();
   const [variables, setVariables] = useState({});
   const [filledPrompt, setFilledPrompt] = useState('');
+  const [editablePrompt, setEditablePrompt] = useState('');
 
   const { data: promptData, isLoading, error } = useQuery({
     queryKey: ['prompt', id],
@@ -22,7 +24,7 @@ const UsePromptPage = () => {
     if (promptData) {
       const extractedVariables = extractVariables(promptData.prompt);
       setVariables(extractedVariables);
-      setFilledPrompt(promptData.prompt);
+      updateFilledPrompt(promptData.prompt, extractedVariables);
     }
   }, [promptData]);
 
@@ -39,24 +41,29 @@ const UsePromptPage = () => {
   const handleInputChange = (variable, value) => {
     setVariables(prev => {
       const updatedVariables = { ...prev, [variable]: value };
-      updateFilledPrompt(updatedVariables);
+      updateFilledPrompt(promptData.prompt, updatedVariables);
       return updatedVariables;
     });
   };
 
-  const updateFilledPrompt = (updatedVariables) => {
-    let newFilledPrompt = promptData.prompt;
+  const updateFilledPrompt = (template, updatedVariables) => {
+    let newFilledPrompt = template;
     Object.entries(updatedVariables).forEach(([variable, value]) => {
       const regex = new RegExp(`\\{\\$${variable}\\}`, 'g');
       const xmlTag = variable.toLowerCase();
       newFilledPrompt = newFilledPrompt.replace(regex, `<${xmlTag}>${value}</${xmlTag}>`);
     });
     setFilledPrompt(newFilledPrompt);
+    setEditablePrompt(newFilledPrompt);
+  };
+
+  const handleEditablePromptChange = (e) => {
+    setEditablePrompt(e.target.value);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate('/chat', { state: { initialMessage: filledPrompt } });
+    navigate('/chat', { state: { initialMessage: editablePrompt } });
   };
 
   const handleBack = () => {
@@ -85,8 +92,14 @@ const UsePromptPage = () => {
           </div>
         ))}
         <div>
-          <Label>Filled Prompt</Label>
-          <div className="mt-1 p-2 bg-gray-100 rounded-md whitespace-pre-wrap">{filledPrompt}</div>
+          <Label htmlFor="editablePrompt">Editable Filled Prompt</Label>
+          <Textarea
+            id="editablePrompt"
+            value={editablePrompt}
+            onChange={handleEditablePromptChange}
+            rows={6}
+            className="mt-1"
+          />
         </div>
         <Button type="submit">Send to Chat</Button>
       </form>
