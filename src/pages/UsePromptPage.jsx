@@ -48,7 +48,8 @@ const UsePromptPage = () => {
     let newFilledPrompt = promptData.prompt;
     Object.entries(updatedVariables).forEach(([variable, value]) => {
       const regex = new RegExp(`\\{\\$${variable}\\}`, 'g');
-      newFilledPrompt = newFilledPrompt.replace(regex, value);
+      const xmlTag = variable.toLowerCase();
+      newFilledPrompt = newFilledPrompt.replace(regex, `<${xmlTag}>${value}</${xmlTag}>`);
     });
     setFilledPrompt(newFilledPrompt);
   };
@@ -85,7 +86,7 @@ const UsePromptPage = () => {
         ))}
         <div>
           <Label>Filled Prompt</Label>
-          <div className="mt-1 p-2 bg-gray-100 rounded-md">{filledPrompt}</div>
+          <div className="mt-1 p-2 bg-gray-100 rounded-md whitespace-pre-wrap">{filledPrompt}</div>
         </div>
         <Button type="submit">Send to Chat</Button>
       </form>
