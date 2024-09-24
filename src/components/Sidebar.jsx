@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home, FolderTree, Activity, Settings, Archive } from 'lucide-react';
+import { Home, MessageSquare, Activity, Settings, Archive } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 
 const Sidebar = () => {
@@ -40,9 +40,9 @@ const Sidebar = () => {
             </Link>
           </li>
           <li>
-            <Link to="/categories" className={`flex items-center text-gray-700 hover:text-black ${isActive('/categories') ? 'font-semibold' : ''}`}>
-              <FolderTree className="w-4 h-4 mr-3" />
-              <span>Categories</span>
+            <Link to="/chat" className={`flex items-center text-gray-700 hover:text-black ${isActive('/chat') ? 'font-semibold' : ''}`}>
+              <MessageSquare className="w-4 h-4 mr-3" />
+              <span>Chat</span>
             </Link>
           </li>
           <li>
