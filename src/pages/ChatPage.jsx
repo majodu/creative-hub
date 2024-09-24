@@ -60,25 +60,28 @@ const ChatPage = () => {
       <ScrollArea className="flex-grow mb-4 p-4 border rounded-lg">
         {messages.map((message, index) => (
           <div key={index} className={`mb-4 ${message.role === 'user' ? 'text-right' : 'text-left'}`}>
-            <div className={`inline-block p-2 rounded-lg ${message.role === 'user' ? 'bg-blue-500 text-white' : 'bg-gray-200'} max-w-[80%] relative`}>
+            <div className={`inline-block p-2 rounded-lg ${message.role === 'user' ? 'bg-blue-500 text-white' : 'bg-gray-200'} max-w-[80%]`}>
               {message.role === 'user' ? (
                 <p>{message.content}</p>
               ) : (
-                <>
-                  <ReactMarkdown className="prose prose-sm dark:prose-invert">
-                    {message.content}
-                  </ReactMarkdown>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="absolute top-2 right-2 p-1"
-                    onClick={() => handleCopyText(message.content)}
-                  >
-                    <Copy className="h-4 w-4" />
-                  </Button>
-                </>
+                <ReactMarkdown className="prose prose-sm dark:prose-invert">
+                  {message.content}
+                </ReactMarkdown>
               )}
             </div>
+            {message.role === 'assistant' && (
+              <div className="mt-2">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => handleCopyText(message.content)}
+                  className="flex items-center space-x-1"
+                >
+                  <Copy className="h-4 w-4" />
+                  <span>Copy</span>
+                </Button>
+              </div>
+            )}
           </div>
         ))}
         {chatMutation.isLoading && (
