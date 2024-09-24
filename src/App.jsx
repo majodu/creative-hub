@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import PromptFormPage from "./pages/PromptFormPage";
 import EditPromptPage from "./pages/EditPromptPage";
 import Settings from "./pages/Settings";
+import Archive from "./pages/Archive";
 
 const queryClient = new QueryClient();
 
@@ -25,6 +26,7 @@ const App = () => (
                 <Route path="/new-prompt" element={<PromptFormPage />} />
                 <Route path="/edit-prompt/:id" element={<EditPromptPage />} />
                 <Route path="/settings" element={<Settings />} />
+                <Route path="/archive" element={<Archive />} />
               </Routes>
             </main>
           </div>

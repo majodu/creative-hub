@@ -1,8 +1,12 @@
 import React from 'react';
 import { Home, FolderTree, Activity, Settings, Archive } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const Sidebar = () => {
+  const location = useLocation();
+
+  const isActive = (path) => location.pathname === path;
+
   return (
     <aside className="w-64 h-screen bg-[#f9f9f9] p-4 flex flex-col text-sm">
       {/* Brand Section */}
@@ -30,33 +34,33 @@ const Sidebar = () => {
         <h4 className="text-xs font-semibold text-gray-500 mb-2">Main</h4>
         <ul className="space-y-2">
           <li>
-            <Link to="/" className="flex items-center text-gray-700 hover:text-black">
+            <Link to="/" className={`flex items-center text-gray-700 hover:text-black ${isActive('/') ? 'font-semibold' : ''}`}>
               <Home className="w-4 h-4 mr-3" />
               <span>Home</span>
             </Link>
           </li>
           <li>
-            <Link to="/categories" className="flex items-center text-gray-700 hover:text-black">
+            <Link to="/categories" className={`flex items-center text-gray-700 hover:text-black ${isActive('/categories') ? 'font-semibold' : ''}`}>
               <FolderTree className="w-4 h-4 mr-3" />
               <span>Categories</span>
             </Link>
           </li>
           <li>
-            <Link to="/activity" className="flex items-center text-gray-700 hover:text-black">
+            <Link to="/activity" className={`flex items-center text-gray-700 hover:text-black ${isActive('/activity') ? 'font-semibold' : ''}`}>
               <Activity className="w-4 h-4 mr-3" />
               <span>Activity</span>
             </Link>
           </li>
           <li>
-            <Link to="/settings" className="flex items-center text-gray-700 hover:text-black">
-              <Settings className="w-4 h-4 mr-3" />
-              <span>Settings</span>
+            <Link to="/archive" className={`flex items-center text-gray-700 hover:text-black ${isActive('/archive') ? 'font-semibold' : ''}`}>
+              <Archive className="w-4 h-4 mr-3" />
+              <span>Archive</span>
             </Link>
           </li>
           <li>
-            <Link to="/archive" className="flex items-center text-gray-700 hover:text-black">
-              <Archive className="w-4 h-4 mr-3" />
-              <span>Archive</span>
+            <Link to="/settings" className={`flex items-center text-gray-700 hover:text-black ${isActive('/settings') ? 'font-semibold' : ''}`}>
+              <Settings className="w-4 h-4 mr-3" />
+              <span>Settings</span>
             </Link>
           </li>
         </ul>

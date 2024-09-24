@@ -1,13 +1,14 @@
 import React from 'react';
-import { Share, Bookmark, BookmarkCheck } from 'lucide-react';
+import { Share, Bookmark, BookmarkCheck, Archive, RotateCcw } from 'lucide-react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { updatePrompt } from '../utils/indexedDB';
+import { updatePrompt, archivePrompt, unarchivePrompt } from '../utils/indexedDB';
 import { toast } from 'sonner';
 import { truncateText } from '../utils/textUtils';
 import { useNavigate } from 'react-router-dom';
 import { Checkbox } from "@/components/ui/checkbox";
+import { Button } from "@/components/ui/button";
 
-const PromptCard = ({ id, title, prompt, likes, tags, bookmarked, onSelect, isSelected }) => {
+const PromptCard = ({ id, title, prompt, likes, tags, bookmarked, archivedAt, onSelect, isSelected }) => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
@@ -22,9 +23,26 @@ const PromptCard = ({ id, title, prompt, likes, tags, bookmarked, onSelect, isSe
     },
   });
 
+  const archiveMutation = useMutation({
+    mutationFn: () => (archivedAt ? unarchivePrompt(id) : archivePrompt(id)),
+    onSuccess: () => {
+      queryClient.invalidateQueries(['prompts']);
+      queryClient.invalidateQueries(['archivedPrompts']);
+      toast.success(archivedAt ? 'Prompt unarchived' : 'Prompt archived');
+    },
+    onError: () => {
+      toast.error('Failed to update archive status');
+    },
+  });
+
   const handleBookmark = (e) => {
     e.stopPropagation();
     bookmarkMutation.mutate(!bookmarked);
+  };
+
+  const handleArchive = (e) => {
+    e.stopPropagation();
+    archiveMutation.mutate();
   };
 
   const handleCardClick = () => {
@@ -54,7 +72,9 @@ const PromptCard = ({ id, title, prompt, likes, tags, bookmarked, onSelect, isSe
           <h2 className="text-lg font-semibold text-gray-900">{title}</h2>
         </div>
         <div className="flex space-x-2">
-          <button 
+          <Button 
+            variant="ghost"
+            size="icon"
             className={`text-gray-400 hover:text-gray-600 ${bookmarked ? 'text-blue-500' : ''}`}
             onClick={handleBookmark}
             disabled={bookmarkMutation.isLoading}
@@ -64,7 +84,20 @@ const PromptCard = ({ id, title, prompt, likes, tags, bookmarked, onSelect, isSe
             ) : (
               <Bookmark className="h-4 w-4" />
             )}
-          </button>
+          </Button>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="text-gray-400 hover:text-gray-600"
+            onClick={handleArchive}
+            disabled={archiveMutation.isLoading}
+          >
+            {archivedAt ? (
+              <RotateCcw className="h-4 w-4" />
+            ) : (
+              <Archive className="h-4 w-4" />
+            )}
+          </Button>
         </div>
       </div>
       <p className="mt-1 text-xs text-gray-600">{truncateText(prompt, 100)}</p>
