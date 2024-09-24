@@ -1,70 +1,216 @@
-# Welcome to your GPT Engineer project
+<!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
+<a id="readme-top"></a>
 
-## Project info
+<!-- PROJECT SHIELDS -->
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![MIT License][license-shield]][license-url]
+[![LinkedIn][linkedin-shield]][linkedin-url]
 
-**URL**: https://run.gptengineer.app/projects/d4975bf4-a69e-44ed-906f-c55bcb04d90b/improve
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="https://github.com/github_username/repo_name">
+    <img src="images/logo.png" alt="Logo" width="80" height="80">
+  </a>
 
-## How can I edit this code?
+<h3 align="center">Prompt Keeper</h3>
 
-There are several ways of editing your application.
+  <p align="center">
+    A powerful tool for managing and organizing AI prompts
+    <br />
+    <a href="https://github.com/github_username/repo_name"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="https://github.com/github_username/repo_name">View Demo</a>
+    ·
+    <a href="https://github.com/github_username/repo_name/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
+    ·
+    <a href="https://github.com/github_username/repo_name/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a>
+  </p>
+</div>
 
-**Use GPT Engineer**
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#usage">Usage</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#acknowledgments">Acknowledgments</a></li>
+  </ol>
+</details>
 
-Simply visit the GPT Engineer project at [GPT Engineer](https://gptengineer.app/projects/d4975bf4-a69e-44ed-906f-c55bcb04d90b/improve) and start prompting.
+<!-- ABOUT THE PROJECT -->
+## About The Project
 
-Changes made via gptengineer.app will be committed automatically to this repo.
+[![Product Name Screen Shot][product-screenshot]](https://example.com)
 
-**Use your preferred IDE**
+Prompt Keeper is a comprehensive application designed to help users manage, organize, and utilize AI prompts effectively. It provides a user-friendly interface for creating, editing, and archiving prompts, as well as integrating with OpenAI's API for generating responses.
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in the GPT Engineer UI.
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### Built With
 
-Follow these steps:
+* [![React][React.js]][React-url]
+* [![Vite][Vite.js]][Vite-url]
+* [![TailwindCSS][TailwindCSS]][Tailwind-url]
+* [![shadcn/ui][shadcn/ui]][shadcn-url]
+* [![React Query][React Query]][React-Query-url]
+* [![IndexedDB][IndexedDB]][IndexedDB-url]
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+<!-- GETTING STARTED -->
+## Getting Started
 
-# Step 3: Install the necessary dependencies.
-npm i
+To get a local copy up and running, follow these simple steps.
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+### Prerequisites
 
-**Edit a file directly in GitHub**
+* npm
+  ```sh
+  npm install npm@latest -g
+  ```
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### Installation
 
-**Use GitHub Codespaces**
+1. Get a free API Key from [OpenAI](https://openai.com/)
+2. Clone the repo
+   ```sh
+   git clone https://github.com/github_username/repo_name.git
+   ```
+3. Install NPM packages
+   ```sh
+   npm install
+   ```
+4. Enter your API key in the Settings page of the application
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## What technologies are used for this project?
+<!-- USAGE EXAMPLES -->
+## Usage
 
-This project is built with .
+Prompt Keeper allows you to:
+1. Create and edit AI prompts
+2. Organize prompts with tags
+3. Archive and unarchive prompts
+4. Generate responses using OpenAI's API
+5. View usage statistics
 
-- Vite
-- React
-- shadcn-ui
-- Tailwind CSS
+For more examples, please refer to the [Documentation](https://example.com)
 
-## How can I deploy this project?
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-All GPT Engineer projects can be deployed directly via the GPT Engineer app.
+<!-- FEATURES -->
+## Features
 
-Simply visit your project at [GPT Engineer](https://gptengineer.app/projects/d4975bf4-a69e-44ed-906f-c55bcb04d90b/improve) and click on Share -> Publish.
+- Create, edit, and delete prompts
+- Tag-based organization system
+- Archiving system for unused prompts
+- Integration with OpenAI's API for response generation
+- Version control for prompts
+- Usage statistics tracking
+- Secure storage of API keys
+- Responsive design for various screen sizes
 
-## I want to use a custom domain - is that possible?
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.gptengineer.app/tips-tricks/custom-domain/)
+<!-- ROADMAP -->
+## Roadmap
+
+- [ ] Add support for multiple AI models
+- [ ] Implement collaborative features for team usage
+- [ ] Enhance prompt suggestion capabilities
+- [ ] Integrate with other AI APIs
+
+See the [open issues](https://github.com/github_username/repo_name/issues) for a full list of proposed features (and known issues).
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- CONTRIBUTING -->
+## Contributing
+
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
+Don't forget to give the project a star! Thanks again!
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- LICENSE -->
+## License
+
+Distributed under the MIT License. See `LICENSE.txt` for more information.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- CONTACT -->
+## Contact
+
+Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
+
+Project Link: [https://github.com/github_username/repo_name](https://github.com/github_username/repo_name)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- ACKNOWLEDGMENTS -->
+## Acknowledgments
+
+* [OpenAI](https://openai.com/) for their powerful AI models
+* [shadcn/ui](https://ui.shadcn.com/) for the beautiful UI components
+* [React Query](https://tanstack.com/query/latest) for efficient data fetching and state management
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[contributors-shield]: https://img.shields.io/github/contributors/github_username/repo_name.svg?style=for-the-badge
+[contributors-url]: https://github.com/github_username/repo_name/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/github_username/repo_name.svg?style=for-the-badge
+[forks-url]: https://github.com/github_username/repo_name/network/members
+[stars-shield]: https://img.shields.io/github/stars/github_username/repo_name.svg?style=for-the-badge
+[stars-url]: https://github.com/github_username/repo_name/stargazers
+[issues-shield]: https://img.shields.io/github/issues/github_username/repo_name.svg?style=for-the-badge
+[issues-url]: https://github.com/github_username/repo_name/issues
+[license-shield]: https://img.shields.io/github/license/github_username/repo_name.svg?style=for-the-badge
+[license-url]: https://github.com/github_username/repo_name/blob/master/LICENSE.txt
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-url]: https://linkedin.com/in/linkedin_username
+[product-screenshot]: images/screenshot.png
+[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[React-url]: https://reactjs.org/
+[Vite.js]: https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white
+[Vite-url]: https://vitejs.dev/
+[TailwindCSS]: https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white
+[Tailwind-url]: https://tailwindcss.com/
+[shadcn/ui]: https://img.shields.io/badge/shadcn%2Fui-000000?style=for-the-badge&logo=shadcnui&logoColor=white
+[shadcn-url]: https://ui.shadcn.com/
+[React Query]: https://img.shields.io/badge/React_Query-FF4154?style=for-the-badge&logo=react-query&logoColor=white
+[React-Query-url]: https://tanstack.com/query/latest
+[IndexedDB]: https://img.shields.io/badge/IndexedDB-0F9D58?style=for-the-badge&logo=indexeddb&logoColor=white
+[IndexedDB-url]: https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API
