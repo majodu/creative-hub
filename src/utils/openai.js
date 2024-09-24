@@ -5,6 +5,7 @@ const OPENAI_API_URL = 'https://api.openai.com/v1/chat/completions';
 export const generateOpenAIResponse = async (userInput) => {
   const apiKey = await secureStore.getItem('openaiKey');
   const defaultModel = await secureStore.getItem('defaultModel') || 'gpt-4o-mini';
+  const maxTokens = await secureStore.getItem('maxTokens') || '1000';
 
   if (!apiKey) {
     throw new Error('OpenAI API key not found. Please set it in the Settings page.');
@@ -20,7 +21,7 @@ export const generateOpenAIResponse = async (userInput) => {
       body: JSON.stringify({
         model: defaultModel,
         messages: [{ role: 'user', content: userInput }],
-        max_tokens: 1000  // Increased to allow for longer responses
+        max_tokens: parseInt(maxTokens, 10)
       })
     });
 
@@ -41,6 +42,7 @@ export const generateOpenAIResponse = async (userInput) => {
 export const generateOpenAIResponseForChatPage = async (userInput) => {
   const apiKey = await secureStore.getItem('openaiKey');
   const defaultModel = await secureStore.getItem('defaultModel') || 'gpt-4o-mini';
+  const maxTokens = await secureStore.getItem('maxTokens') || '1000';
 
   if (!apiKey) {
     throw new Error('OpenAI API key not found. Please set it in the Settings page.');
@@ -56,7 +58,7 @@ export const generateOpenAIResponseForChatPage = async (userInput) => {
       body: JSON.stringify({
         model: defaultModel,
         messages: [{ role: 'user', content: userInput }],
-        max_tokens: 1000  // Increased to allow for longer responses
+        max_tokens: parseInt(maxTokens, 10)
       })
     });
 

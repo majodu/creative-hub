@@ -12,24 +12,19 @@ const Settings = () => {
   const [openaiKey, setOpenaiKey] = useState('');
   const [defaultPrompt, setDefaultPrompt] = useState('');
   const [defaultModel, setDefaultModel] = useState('gpt-4o-mini');
+  const [maxTokens, setMaxTokens] = useState('1000');
 
   useEffect(() => {
     const loadSettings = async () => {
       const storedOpenaiKey = await secureStore.getItem('openaiKey');
       const storedDefaultPrompt = await secureStore.getItem('defaultPrompt');
       const storedDefaultModel = await secureStore.getItem('defaultModel');
-      if (storedOpenaiKey) {
-        setOpenaiKey(storedOpenaiKey);
-      }
-      if (storedDefaultPrompt) {
-        setDefaultPrompt(storedDefaultPrompt);
-      }
-      if (storedDefaultModel) {
-        setDefaultModel(storedDefaultModel);
-      } else {
-        // Set default model to gpt-4o-mini if not previously set
-        setDefaultModel('gpt-4o-mini');
-      }
+      const storedMaxTokens = await secureStore.getItem('maxTokens');
+      if (storedOpenaiKey) setOpenaiKey(storedOpenaiKey);
+      if (storedDefaultPrompt) setDefaultPrompt(storedDefaultPrompt);
+      if (storedDefaultModel) setDefaultModel(storedDefaultModel);
+      if (storedMaxTokens) setMaxTokens(storedMaxTokens);
+      else setMaxTokens('1000'); // Default value if not set
     };
     loadSettings();
   }, []);
@@ -39,6 +34,7 @@ const Settings = () => {
     await secureStore.setItem('openaiKey', openaiKey);
     await secureStore.setItem('defaultPrompt', defaultPrompt);
     await secureStore.setItem('defaultModel', defaultModel);
+    await secureStore.setItem('maxTokens', maxTokens);
     toast.success('Settings updated successfully');
   };
 
@@ -82,6 +78,16 @@ const Settings = () => {
               <SelectItem value="gpt-4o-mini">GPT-4O Mini</SelectItem>
             </SelectContent>
           </Select>
+        </div>
+        <div className="space-y-2">
+          <Label htmlFor="maxTokens">Max Tokens</Label>
+          <Input 
+            id="maxTokens" 
+            type="number" 
+            value={maxTokens} 
+            onChange={(e) => setMaxTokens(e.target.value)} 
+            placeholder="Max tokens for API response" 
+          />
         </div>
         <Button type="submit">Save Changes</Button>
       </form>
