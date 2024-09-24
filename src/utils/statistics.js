@@ -13,19 +13,18 @@ const initDB = async () => {
   });
 };
 
-const getStats = async () => {
+export const getStats = async () => {
   const db = await initDB();
-  const stats = await db.get(STORE_NAME, 'appStats');
+  let stats = await db.get(STORE_NAME, 'appStats');
   if (!stats) {
-    const initialStats = {
+    stats = {
       id: 'appStats',
       promptsCreated: 0,
       promptsShared: 0,
       chatMessagesSent: 0,
       promptsUsed: 0,
     };
-    await db.put(STORE_NAME, initialStats);
-    return initialStats;
+    await db.put(STORE_NAME, stats);
   }
   return stats;
 };
@@ -50,4 +49,3 @@ export const incrementPromptsCreated = () => updateStat('promptsCreated');
 export const incrementPromptsShared = () => updateStat('promptsShared');
 export const incrementChatMessagesSent = () => updateStat('chatMessagesSent');
 export const incrementPromptsUsed = () => updateStat('promptsUsed');
-export { getStats };
