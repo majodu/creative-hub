@@ -108,13 +108,14 @@ const EditPromptPage = () => {
     navigate('/');
   };
 
-  const handleVersionChange = (newIndex) => {
+  const handleVersionChange = (e, newIndex) => {
+    e.preventDefault(); // Prevent form submission
     setCurrentVersionIndex(newIndex);
     setPrompt(versions[newIndex]);
   };
 
   const handleViewChanges = (e) => {
-    e.preventDefault();
+    e.preventDefault(); // Prevent form submission
     const diffs = compareTexts(versions[currentVersionIndex - 1], versions[currentVersionIndex]);
     setCurrentDiffs(diffs);
     setIsDiffModalOpen(true);
@@ -213,8 +214,8 @@ const EditPromptPage = () => {
           <PromptVersionControl
             currentVersion={currentVersionIndex + 1}
             totalVersions={versions.length}
-            onPrevious={() => handleVersionChange(Math.max(0, currentVersionIndex - 1))}
-            onNext={() => handleVersionChange(Math.min(versions.length - 1, currentVersionIndex + 1))}
+            onPrevious={(e) => handleVersionChange(e, Math.max(0, currentVersionIndex - 1))}
+            onNext={(e) => handleVersionChange(e, Math.min(versions.length - 1, currentVersionIndex + 1))}
           />
           {currentVersionIndex > 0 && (
             <DiffIndicator
