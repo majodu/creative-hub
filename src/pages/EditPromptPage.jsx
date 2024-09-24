@@ -9,7 +9,7 @@ import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, 
 import { getPromptById, updatePrompt, archivePrompt, deletePrompt } from '../utils/indexedDB';
 import { compareTexts } from '../utils/diffUtils';
 import { toast } from 'sonner';
-import { ArrowLeft, Archive, Trash2 } from 'lucide-react';
+import { ArrowLeft, Archive, Trash2, Play } from 'lucide-react';
 import PromptVersionControl from '../components/PromptVersionControl';
 import DiffIndicator from '../components/DiffIndicator';
 import DiffModal from '../components/DiffModal';
@@ -117,6 +117,10 @@ const EditPromptPage = () => {
     const diffs = compareTexts(versions[currentVersionIndex - 1], versions[currentVersionIndex]);
     setCurrentDiffs(diffs);
     setIsDiffModalOpen(true);
+  };
+
+  const handleUsePrompt = () => {
+    navigate(`/use-prompt/${id}`);
   };
 
   if (isLoading) return <div>Loading...</div>;
@@ -227,7 +231,12 @@ const EditPromptPage = () => {
             placeholder="Enter tags separated by commas"
           />
         </div>
-        <Button type="submit">Update Prompt Template</Button>
+        <div className="flex justify-between">
+          <Button type="submit">Update Prompt Template</Button>
+          <Button type="button" onClick={handleUsePrompt} className="bg-green-500 hover:bg-green-600">
+            <Play className="mr-2 h-4 w-4" /> Use Prompt
+          </Button>
+        </div>
       </form>
       <DiffModal
         isOpen={isDiffModalOpen}

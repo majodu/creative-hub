@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -7,9 +8,17 @@ import { generateOpenAIResponseForChatPage } from '../utils/openai';
 import { toast } from 'sonner';
 
 const ChatPage = () => {
+  const location = useLocation();
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const queryClient = useQueryClient();
+
+  useEffect(() => {
+    if (location.state && location.state.initialMessage) {
+      setMessages([{ role: 'user', content: location.state.initialMessage }]);
+      chatMutation.mutate(location.state.initialMessage);
+    }
+  }, [location.state]);
 
   const chatMutation = useMutation({
     mutationFn: generateOpenAIResponseForChatPage,

@@ -7,6 +7,7 @@ import Sidebar from "./components/Sidebar";
 import Index from "./pages/Index";
 import PromptFormPage from "./pages/PromptFormPage";
 import EditPromptPage from "./pages/EditPromptPage";
+import UsePromptPage from "./pages/UsePromptPage";
 import Settings from "./pages/Settings";
 import Archive from "./pages/Archive";
 import ChatPage from "./pages/ChatPage";
@@ -26,6 +27,7 @@ const App = () => (
                 <Route path="/" element={<Index />} />
                 <Route path="/new-prompt" element={<PromptFormPage />} />
                 <Route path="/edit-prompt/:id" element={<EditPromptPage />} />
+                <Route path="/use-prompt/:id" element={<UsePromptPage />} />
                 <Route path="/settings" element={<Settings />} />
                 <Route path="/archive" element={<Archive />} />
                 <Route path="/chat" element={<ChatPage />} />
