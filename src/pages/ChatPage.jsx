@@ -6,7 +6,6 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { generateOpenAIResponseForChatPage } from '../utils/openai';
 import { toast } from 'sonner';
-import { Send } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 
 const ChatPage = () => {
@@ -46,28 +45,24 @@ const ChatPage = () => {
   };
 
   return (
-    <div className="flex flex-col h-screen max-w-3xl mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Chat with AI</h1>
-      <ScrollArea className="flex-grow mb-4 p-4 border rounded-lg bg-gray-50">
+    <div className="flex flex-col h-screen p-4 md:p-6 max-w-4xl mx-auto">
+      <h1 className="text-2xl font-bold mb-6">Chat with AI</h1>
+      <ScrollArea className="flex-grow mb-4 p-4 border rounded-lg">
         <div className="space-y-4">
           {messages.map((message, index) => (
             <div key={index} className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-              <div className={`max-w-[80%] p-3 rounded-lg ${
-                message.role === 'user' 
-                  ? 'bg-blue-500 text-white' 
-                  : 'bg-white border border-gray-300'
+              <div className={`max-w-[80%] md:max-w-[70%] p-3 rounded-lg ${
+                message.role === 'user' ? 'bg-blue-500 text-white' : 'bg-gray-200'
               }`}>
                 <ReactMarkdown 
-                  className="prose prose-sm max-w-none"
+                  className="prose max-w-none dark:prose-invert"
                   components={{
                     p: ({node, ...props}) => <p className="mb-2" {...props} />,
-                    ul: ({node, ...props}) => <ul className="list-disc pl-4 mb-2" {...props} />,
-                    ol: ({node, ...props}) => <ol className="list-decimal pl-4 mb-2" {...props} />,
-                    li: ({node, ...props}) => <li className="mb-1" {...props} />,
+                    pre: ({node, ...props}) => <pre className="bg-gray-800 text-white p-2 rounded overflow-x-auto" {...props} />,
                     code: ({node, inline, ...props}) => 
                       inline 
-                        ? <code className="bg-gray-100 rounded px-1 py-0.5" {...props} />
-                        : <code className="block bg-gray-100 rounded p-2 my-2 whitespace-pre-wrap" {...props} />,
+                        ? <code className="bg-gray-200 text-red-500 px-1 rounded" {...props} />
+                        : <code className="block bg-gray-800 text-white p-2 rounded overflow-x-auto" {...props} />,
                   }}
                 >
                   {message.content}
@@ -75,18 +70,10 @@ const ChatPage = () => {
               </div>
             </div>
           ))}
-          {chatMutation.isLoading && (
-            <div className="flex justify-start">
-              <div className="bg-white border border-gray-300 p-3 rounded-lg">
-                <div className="animate-pulse flex space-x-2">
-                  <div className="rounded-full bg-gray-300 h-2 w-2"></div>
-                  <div className="rounded-full bg-gray-300 h-2 w-2"></div>
-                  <div className="rounded-full bg-gray-300 h-2 w-2"></div>
-                </div>
-              </div>
-            </div>
-          )}
         </div>
+        {chatMutation.isLoading && (
+          <div className="text-center text-gray-500 mt-4">AI is thinking...</div>
+        )}
       </ScrollArea>
       <form onSubmit={handleSendMessage} className="flex gap-2">
         <Input
@@ -96,10 +83,7 @@ const ChatPage = () => {
           placeholder="Type your message here..."
           className="flex-grow"
         />
-        <Button type="submit" disabled={chatMutation.isLoading}>
-          <Send className="h-4 w-4 mr-2" />
-          Send
-        </Button>
+        <Button type="submit" disabled={chatMutation.isLoading}>Send</Button>
       </form>
     </div>
   );
