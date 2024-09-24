@@ -1,34 +1,15 @@
 <!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
 <a id="readme-top"></a>
 
-<!-- PROJECT SHIELDS -->
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
-
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/github_username/repo_name">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
-  </a>
-
 <h3 align="center">Prompt Keeper</h3>
 
   <p align="center">
     A powerful tool for managing and organizing AI prompts
     <br />
-    <a href="https://github.com/github_username/repo_name"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
-    <a href="https://github.com/github_username/repo_name">View Demo</a>
-    ·
-    <a href="https://github.com/github_username/repo_name/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
-    ·
-    <a href="https://github.com/github_username/repo_name/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a>
+    <a href="https://creative-hub.gptengineer.run/">View Demo</a>
   </p>
 </div>
 
@@ -51,7 +32,6 @@
     </li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="#features">Features</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -61,10 +41,7 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
-
-Prompt Keeper is a comprehensive application designed to help users manage, organize, and utilize AI prompts effectively. It provides a user-friendly interface for creating, editing, and archiving prompts, as well as integrating with OpenAI's API for generating responses.
+**PromptKeeper** is a privacy-first, browser-based application that allows users to **auto-generate prompts** from predefined templates, helping them manage, organize, and optimize AI prompts efficiently, with all data stored locally in the browser using **IndexedDB**. The app includes built-in version control, allowing users to easily create, edit, and track changes to their prompts, ensuring they can view and revert to previous versions. Built with **GPTEngineer**, **React**, **Tailwind CSS**, and **Redux**, PromptKeeper offers a responsive and customizable interface tailored for an intuitive user experience.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -76,7 +53,7 @@ Prompt Keeper is a comprehensive application designed to help users manage, orga
 * [![shadcn/ui][shadcn/ui]][shadcn-url]
 * [![React Query][React Query]][React-Query-url]
 * [![IndexedDB][IndexedDB]][IndexedDB-url]
-
+* [GPT Engineer](https://gptengineer.app/)
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- GETTING STARTED -->
@@ -93,7 +70,7 @@ To get a local copy up and running, follow these simple steps.
 
 ### Installation
 
-1. Get a free API Key from [OpenAI](https://openai.com/)
+1. Get a API Key from [OpenAI](https://platform.openai.com/api-keys)
 2. Clone the repo
    ```sh
    git clone https://github.com/github_username/repo_name.git
@@ -110,14 +87,16 @@ To get a local copy up and running, follow these simple steps.
 ## Usage
 
 Prompt Keeper allows you to:
-1. Create and edit AI prompts
+1. Automatically generate and edit AI prompts
 2. Organize prompts with tags
 3. Archive and unarchive prompts
 4. Generate responses using OpenAI's API
 5. View usage statistics
 
-For more examples, please refer to the [Documentation](https://example.com)
-
+### Intructions:
+1. Head to the settings page and configure your OpenAPI key and settings
+2. Use the generator on the home page to create a prompt template EX: "You will be provided with a tweet, and your task is to classify its sentiment as positive, neutral, or negative." Find more examples here: [OpenAI Examples](https://platform.openai.com/docs/examples)
+3. Once the prompt is created, click on the prompt from the home page, and click the use prompt button.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- FEATURES -->
@@ -134,17 +113,6 @@ For more examples, please refer to the [Documentation](https://example.com)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- ROADMAP -->
-## Roadmap
-
-- [ ] Add support for multiple AI models
-- [ ] Implement collaborative features for team usage
-- [ ] Enhance prompt suggestion capabilities
-- [ ] Integrate with other AI APIs
-
-See the [open issues](https://github.com/github_username/repo_name/issues) for a full list of proposed features (and known issues).
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- CONTRIBUTING -->
 ## Contributing
@@ -172,10 +140,9 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
+Mattias - [LinkedIn](https://www.linkedin.com/in/md-security/) [Website](https://mattias-devs.xyz)
 
-Project Link: [https://github.com/github_username/repo_name](https://github.com/github_username/repo_name)
-
+Project Link: [https://github.com/majodu/creative-hub](https://github.com/github_username/repo_name)
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- ACKNOWLEDGMENTS -->
