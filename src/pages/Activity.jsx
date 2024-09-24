@@ -14,10 +14,10 @@ const Activity = () => {
   if (error) return <div className="container mx-auto p-6">Error loading statistics: {error.message}</div>;
 
   const chartData = stats ? [
-    { name: 'Prompts Created', value: stats.promptsCreated },
-    { name: 'Prompts Shared', value: stats.promptsShared },
-    { name: 'API Calls Made', value: stats.apiCallsMade },
-    { name: 'Prompts Used', value: stats.promptsUsed },
+    { name: 'Prompts Created', value: stats.promptsCreated || 0 },
+    { name: 'Prompts Shared', value: stats.promptsShared || 0 },
+    { name: 'API Calls Made', value: stats.apiCallsMade || 0 },
+    { name: 'Prompts Used', value: stats.promptsUsed || 0 },
   ] : [];
 
   return (

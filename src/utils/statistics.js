@@ -40,7 +40,7 @@ const updateStat = async (statName) => {
     apiCallsMade: 0,
     promptsUsed: 0,
   };
-  stats[statName]++;
+  stats[statName] = (stats[statName] || 0) + 1;
   await store.put(stats);
   return stats;
 };
