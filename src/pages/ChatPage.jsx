@@ -6,6 +6,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { generateOpenAIResponseForChatPage } from '../utils/openai';
 import { toast } from 'sonner';
+import ReactMarkdown from 'react-markdown';
 
 const ChatPage = () => {
   const location = useLocation();
@@ -50,7 +51,19 @@ const ChatPage = () => {
         {messages.map((message, index) => (
           <div key={index} className={`mb-4 ${message.role === 'user' ? 'text-right' : 'text-left'}`}>
             <div className={`inline-block p-2 rounded-lg ${message.role === 'user' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}>
-              {message.content}
+              <ReactMarkdown 
+                className="prose max-w-none"
+                components={{
+                  p: ({node, ...props}) => <p className="mb-2" {...props} />,
+                  pre: ({node, ...props}) => <pre className="bg-gray-800 text-white p-2 rounded" {...props} />,
+                  code: ({node, inline, ...props}) => 
+                    inline 
+                      ? <code className="bg-gray-200 text-red-500 px-1 rounded" {...props} />
+                      : <code className="block bg-gray-800 text-white p-2 rounded" {...props} />,
+                }}
+              >
+                {message.content}
+              </ReactMarkdown>
             </div>
           </div>
         ))}
