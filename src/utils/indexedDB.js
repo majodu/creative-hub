@@ -87,3 +87,8 @@ export const getArchivedPrompts = async (searchTerm = '') => {
   
   return archivedPrompts;
 };
+
+export const deletePrompt = async (id) => {
+  const db = await initDB();
+  return db.delete(storeName, id);
+};

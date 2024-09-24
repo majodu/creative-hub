@@ -5,10 +5,10 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { getPromptById, updatePrompt, archivePrompt } from '../utils/indexedDB';
+import { getPromptById, updatePrompt, archivePrompt, deletePrompt } from '../utils/indexedDB';
 import { compareTexts } from '../utils/diffUtils';
 import { toast } from 'sonner';
-import { ArrowLeft, Archive } from 'lucide-react';
+import { ArrowLeft, Archive, Trash2 } from 'lucide-react';
 import PromptVersionControl from '../components/PromptVersionControl';
 import DiffIndicator from '../components/DiffIndicator';
 import DiffModal from '../components/DiffModal';
@@ -68,6 +68,19 @@ const EditPromptPage = () => {
     },
   });
 
+  const deletePromptMutation = useMutation({
+    mutationFn: deletePrompt,
+    onSuccess: () => {
+      queryClient.invalidateQueries(['prompts']);
+      toast.success('Prompt deleted successfully!');
+      navigate('/');
+    },
+    onError: (error) => {
+      console.error('Error deleting prompt:', error);
+      toast.error('Failed to delete prompt. Please try again.');
+    },
+  });
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const newVersions = [...versions, prompt];
@@ -83,6 +96,12 @@ const EditPromptPage = () => {
   const handleArchive = () => {
     if (window.confirm('Are you sure you want to archive this prompt?')) {
       archivePromptMutation.mutate(parseInt(id));
+    }
+  };
+
+  const handleDelete = () => {
+    if (window.confirm('Are you sure you want to delete this prompt? This action cannot be undone.')) {
+      deletePromptMutation.mutate(parseInt(id));
     }
   };
 
@@ -114,14 +133,24 @@ const EditPromptPage = () => {
         >
           <ArrowLeft className="mr-2 h-4 w-4" /> Back
         </Button>
-        <Button
-          variant="ghost"
-          size="icon"
-          className="text-yellow-500 hover:text-yellow-700 hover:bg-yellow-100"
-          onClick={handleArchive}
-        >
-          <Archive className="h-5 w-5" />
-        </Button>
+        <div className="flex space-x-2">
+          <Button
+            variant="ghost"
+            size="icon"
+            className="text-yellow-500 hover:text-yellow-700 hover:bg-yellow-100"
+            onClick={handleArchive}
+          >
+            <Archive className="h-5 w-5" />
+          </Button>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="text-red-500 hover:text-red-700 hover:bg-red-100"
+            onClick={handleDelete}
+          >
+            <Trash2 className="h-5 w-5" />
+          </Button>
+        </div>
       </div>
       <h1 className="text-2xl font-bold mb-6">Edit Prompt Template</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
