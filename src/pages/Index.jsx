@@ -46,34 +46,38 @@ const Index = () => {
   if (error) return <div>Error loading prompts: {error.message}</div>;
 
   return (
-    <main className="flex-1 flex flex-col h-full">
-      <div className="flex-grow overflow-auto p-6">
-        <div className="mb-4 w-full">
-          <SearchBar onSearch={handleSearch} />
-        </div>
-        <div className="flex justify-between items-center mb-4">
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={toggleBookmarkFilter}
-            className="text-xs text-gray-500 hover:text-gray-700"
-          >
-            <BookmarkIcon className="h-3 w-3 mr-1" />
-            <span>{showBookmarked ? "Show All" : "Show Bookmarked"}</span>
-          </Button>
-          {selectedPrompts.length > 0 && (
-            <ExportWidget 
-              selectedPrompts={selectedPrompts} 
-              prompts={prompts}
+    <main className="flex flex-col h-screen">
+      <div className="flex-grow overflow-hidden flex flex-col">
+        <div className="p-6">
+          <div className="mb-4 w-full">
+            <SearchBar onSearch={handleSearch} />
+          </div>
+          <div className="flex justify-between items-center mb-4">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={toggleBookmarkFilter}
               className="text-xs text-gray-500 hover:text-gray-700"
-            />
-          )}
+            >
+              <BookmarkIcon className="h-3 w-3 mr-1" />
+              <span>{showBookmarked ? "Show All" : "Show Bookmarked"}</span>
+            </Button>
+            {selectedPrompts.length > 0 && (
+              <ExportWidget 
+                selectedPrompts={selectedPrompts} 
+                prompts={prompts}
+                className="text-xs text-gray-500 hover:text-gray-700"
+              />
+            )}
+          </div>
         </div>
-        <PromptGrid 
-          prompts={filteredPrompts} 
-          onSelect={handlePromptSelection}
-          selectedPrompts={selectedPrompts}
-        />
+        <div className="flex-grow overflow-y-auto px-6 pb-6">
+          <PromptGrid 
+            prompts={filteredPrompts} 
+            onSelect={handlePromptSelection}
+            selectedPrompts={selectedPrompts}
+          />
+        </div>
       </div>
       <div className="p-6 bg-white border-t">
         <ChatInput />
