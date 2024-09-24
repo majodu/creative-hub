@@ -1,14 +1,14 @@
 import React from 'react';
-import { Share, Bookmark, BookmarkCheck, Archive, RotateCcw, Copy } from 'lucide-react';
+import { Share, Bookmark, BookmarkCheck, Copy } from 'lucide-react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { updatePrompt, archivePrompt, unarchivePrompt } from '../utils/indexedDB';
+import { updatePrompt } from '../utils/indexedDB';
 import { toast } from 'sonner';
 import { truncateText } from '../utils/textUtils';
 import { useNavigate } from 'react-router-dom';
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 
-const PromptCard = ({ id, title, prompt, likes, tags, bookmarked, archivedAt, onSelect, isSelected }) => {
+const PromptCard = ({ id, title, prompt, likes, tags, bookmarked, onSelect, isSelected }) => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
@@ -23,26 +23,9 @@ const PromptCard = ({ id, title, prompt, likes, tags, bookmarked, archivedAt, on
     },
   });
 
-  const archiveMutation = useMutation({
-    mutationFn: () => (archivedAt ? unarchivePrompt(id) : archivePrompt(id)),
-    onSuccess: () => {
-      queryClient.invalidateQueries(['prompts']);
-      queryClient.invalidateQueries(['archivedPrompts']);
-      toast.success(archivedAt ? 'Prompt unarchived' : 'Prompt archived');
-    },
-    onError: () => {
-      toast.error('Failed to update archive status');
-    },
-  });
-
   const handleBookmark = (e) => {
     e.stopPropagation();
     bookmarkMutation.mutate(!bookmarked);
-  };
-
-  const handleArchive = (e) => {
-    e.stopPropagation();
-    archiveMutation.mutate();
   };
 
   const handleCardClick = () => {
@@ -100,19 +83,6 @@ const PromptCard = ({ id, title, prompt, likes, tags, bookmarked, archivedAt, on
               <BookmarkCheck className="h-4 w-4" />
             ) : (
               <Bookmark className="h-4 w-4" />
-            )}
-          </Button>
-          <Button
-            variant="ghost"
-            size="icon"
-            className="text-gray-400 hover:text-gray-600"
-            onClick={handleArchive}
-            disabled={archiveMutation.isLoading}
-          >
-            {archivedAt ? (
-              <RotateCcw className="h-4 w-4" />
-            ) : (
-              <Archive className="h-4 w-4" />
             )}
           </Button>
         </div>
