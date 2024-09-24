@@ -91,18 +91,6 @@ export const getArchivedPrompts = async (searchTerm = '') => {
   return archivedPrompts;
 };
 
-export const getRecentlyArchivedPrompts = async (limit = 5) => {
-  const db = await initDB();
-  const tx = db.transaction(storeName, 'readonly');
-  const store = tx.objectStore(storeName);
-  const index = store.index('archivedAt');
-  const archivedPrompts = await index.getAll(IDBKeyRange.lowerBound(new Date(0)));
-  
-  return archivedPrompts
-    .sort((a, b) => new Date(b.archivedAt) - new Date(a.archivedAt))
-    .slice(0, limit);
-};
-
 export const deletePrompt = async (id) => {
   const db = await initDB();
   return db.delete(storeName, id);

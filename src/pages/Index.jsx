@@ -15,7 +15,7 @@ const Index = () => {
 
   const { data: prompts, isLoading, error } = useQuery({
     queryKey: ['prompts'],
-    queryFn: getAllPrompts,
+    queryFn: () => getAllPrompts(false), // Pass false to exclude archived prompts
   });
 
   const handleSearch = (term) => {
