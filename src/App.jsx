@@ -9,7 +9,7 @@ import PromptFormPage from "./pages/PromptFormPage";
 import EditPromptPage from "./pages/EditPromptPage";
 import Settings from "./pages/Settings";
 import Archive from "./pages/Archive";
-import Chat from "./pages/Chat";
+import ChatPage from "./pages/ChatPage";
 
 const queryClient = new QueryClient();
 
@@ -28,7 +28,7 @@ const App = () => (
                 <Route path="/edit-prompt/:id" element={<EditPromptPage />} />
                 <Route path="/settings" element={<Settings />} />
                 <Route path="/archive" element={<Archive />} />
-                <Route path="/chat" element={<Chat />} />
+                <Route path="/chat" element={<ChatPage />} />
               </Routes>
             </main>
           </div>
