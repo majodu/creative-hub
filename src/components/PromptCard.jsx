@@ -1,5 +1,5 @@
 import React from 'react';
-import { Share, Bookmark, BookmarkCheck, Archive, RotateCcw } from 'lucide-react';
+import { Share, Bookmark, BookmarkCheck, Archive, RotateCcw, Copy } from 'lucide-react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { updatePrompt, archivePrompt, unarchivePrompt } from '../utils/indexedDB';
 import { toast } from 'sonner';
@@ -54,6 +54,15 @@ const PromptCard = ({ id, title, prompt, likes, tags, bookmarked, archivedAt, on
     onSelect(id);
   };
 
+  const handleCopy = (e) => {
+    e.stopPropagation();
+    navigator.clipboard.writeText(prompt).then(() => {
+      toast.success('Prompt copied to clipboard');
+    }, () => {
+      toast.error('Failed to copy prompt');
+    });
+  };
+
   const shouldShowTags = tags.length > 1 || (tags.length === 1 && tags[0] !== '');
 
   return (
@@ -72,6 +81,14 @@ const PromptCard = ({ id, title, prompt, likes, tags, bookmarked, archivedAt, on
           <h2 className="text-lg font-semibold text-gray-900">{title}</h2>
         </div>
         <div className="flex space-x-2">
+          <Button 
+            variant="ghost"
+            size="icon"
+            className="text-gray-400 hover:text-gray-600"
+            onClick={handleCopy}
+          >
+            <Copy className="h-4 w-4" />
+          </Button>
           <Button 
             variant="ghost"
             size="icon"
