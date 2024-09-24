@@ -7,6 +7,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { generateOpenAIResponseForChatPage } from '../utils/openai';
 import { toast } from 'sonner';
 import ReactMarkdown from 'react-markdown';
+import { Copy } from 'lucide-react';
 
 const ChatPage = () => {
   const location = useLocation();
@@ -44,19 +45,38 @@ const ChatPage = () => {
     chatMutation.mutate(input);
   };
 
+  const handleCopyText = (text) => {
+    navigator.clipboard.writeText(text).then(() => {
+      toast.success('Text copied to clipboard');
+    }, (err) => {
+      console.error('Failed to copy text: ', err);
+      toast.error('Failed to copy text');
+    });
+  };
+
   return (
     <div className="flex flex-col h-screen p-6 max-w-3xl mx-auto">
       <h1 className="text-2xl font-bold mb-6">Chat with AI</h1>
       <ScrollArea className="flex-grow mb-4 p-4 border rounded-lg">
         {messages.map((message, index) => (
           <div key={index} className={`mb-4 ${message.role === 'user' ? 'text-right' : 'text-left'}`}>
-            <div className={`inline-block p-2 rounded-lg ${message.role === 'user' ? 'bg-blue-500 text-white' : 'bg-gray-200'} max-w-[80%]`}>
+            <div className={`inline-block p-2 rounded-lg ${message.role === 'user' ? 'bg-blue-500 text-white' : 'bg-gray-200'} max-w-[80%] relative`}>
               {message.role === 'user' ? (
                 <p>{message.content}</p>
               ) : (
-                <ReactMarkdown className="prose prose-sm dark:prose-invert">
-                  {message.content}
-                </ReactMarkdown>
+                <>
+                  <ReactMarkdown className="prose prose-sm dark:prose-invert">
+                    {message.content}
+                  </ReactMarkdown>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="absolute top-2 right-2 p-1"
+                    onClick={() => handleCopyText(message.content)}
+                  >
+                    <Copy className="h-4 w-4" />
+                  </Button>
+                </>
               )}
             </div>
           </div>
