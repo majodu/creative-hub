@@ -10,17 +10,17 @@ const DiffModal = ({ isOpen, onClose, diffs }) => {
           <DialogTitle>Changes</DialogTitle>
         </DialogHeader>
         <ScrollArea className="h-[60vh]">
-          <pre className="text-sm">
+          <pre className="text-sm whitespace-pre-wrap break-words">
             {diffs.map((part, index) => (
               <span
                 key={index}
-                className={
+                className={`${
                   part.added
                     ? "bg-green-100 text-green-800"
                     : part.removed
                     ? "bg-red-100 text-red-800"
                     : ""
-                }
+                } inline-block`}
               >
                 {part.value}
               </span>
