@@ -4,7 +4,7 @@ const OPENAI_API_URL = 'https://api.openai.com/v1/chat/completions';
 
 export const generateOpenAIResponse = async (userInput) => {
   const apiKey = await secureStore.getItem('openaiKey');
-  const defaultModel = await secureStore.getItem('defaultModel') || 'gpt-3.5-turbo';
+  const defaultModel = await secureStore.getItem('defaultModel') || 'gpt-4o-mini';
 
   if (!apiKey) {
     throw new Error('OpenAI API key not found. Please set it in the Settings page.');
@@ -40,7 +40,7 @@ export const generateOpenAIResponse = async (userInput) => {
 
 export const generateOpenAIResponseForChatPage = async (userInput) => {
   const apiKey = await secureStore.getItem('openaiKey');
-  const defaultModel = await secureStore.getItem('defaultModel') || 'gpt-3.5-turbo';
+  const defaultModel = await secureStore.getItem('defaultModel') || 'gpt-4o-mini';
 
   if (!apiKey) {
     throw new Error('OpenAI API key not found. Please set it in the Settings page.');

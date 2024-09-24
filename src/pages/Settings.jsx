@@ -11,7 +11,7 @@ import { toast } from 'sonner';
 const Settings = () => {
   const [openaiKey, setOpenaiKey] = useState('');
   const [defaultPrompt, setDefaultPrompt] = useState('');
-  const [defaultModel, setDefaultModel] = useState('gpt-3.5-turbo');
+  const [defaultModel, setDefaultModel] = useState('gpt-4o-mini');
 
   useEffect(() => {
     const loadSettings = async () => {
@@ -26,6 +26,9 @@ const Settings = () => {
       }
       if (storedDefaultModel) {
         setDefaultModel(storedDefaultModel);
+      } else {
+        // Set default model to gpt-4o-mini if not previously set
+        setDefaultModel('gpt-4o-mini');
       }
     };
     loadSettings();
@@ -75,6 +78,8 @@ const Settings = () => {
               <SelectItem value="gpt-3.5-turbo">GPT-3.5 Turbo</SelectItem>
               <SelectItem value="gpt-4">GPT-4</SelectItem>
               <SelectItem value="gpt-4-32k">GPT-4 32k</SelectItem>
+              <SelectItem value="gpt-4o">GPT-4O</SelectItem>
+              <SelectItem value="gpt-4o-mini">GPT-4O Mini</SelectItem>
             </SelectContent>
           </Select>
         </div>
