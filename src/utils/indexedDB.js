@@ -1,5 +1,5 @@
 import { openDB } from 'idb';
-import { incrementPromptsCreated, incrementPromptsShared, incrementPromptsUsed } from './statistics';
+import { incrementPromptsCreated, incrementPromptsUsed } from './statistics';
 
 const dbName = 'PromptKeeperDB';
 const storeName = 'prompts';
@@ -97,11 +97,6 @@ export const getArchivedPrompts = async (searchTerm = '') => {
 export const deletePrompt = async (id) => {
   const db = await initDB();
   return db.delete(storeName, id);
-};
-
-export const sharePrompt = async (id) => {
-  // Implement sharing logic here
-  await incrementPromptsShared();
 };
 
 export const usePrompt = async (id) => {
