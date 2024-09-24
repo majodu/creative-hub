@@ -50,8 +50,7 @@ const UsePromptPage = () => {
     let newFilledPrompt = template;
     Object.entries(updatedVariables).forEach(([variable, value]) => {
       const regex = new RegExp(`\\{\\$${variable}\\}`, 'g');
-      const xmlTag = variable.toLowerCase();
-      newFilledPrompt = newFilledPrompt.replace(regex, `<${xmlTag}>${value}</${xmlTag}>`);
+      newFilledPrompt = newFilledPrompt.replace(regex, value);
     });
     setFilledPrompt(newFilledPrompt);
     setEditablePrompt(newFilledPrompt);
