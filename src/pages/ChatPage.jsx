@@ -45,8 +45,8 @@ const ChatPage = () => {
   };
 
   return (
-    <div className="flex flex-col h-screen p-4 md:p-6 max-w-3xl mx-auto">
-      <h1 className="text-2xl font-bold mb-6">Chat with AI</h1>
+    <div className="flex flex-col h-screen max-w-3xl mx-auto p-4">
+      <h1 className="text-2xl font-bold mb-4">Chat with AI</h1>
       <ScrollArea className="flex-grow mb-4 p-4 border rounded-lg">
         <div className="space-y-4">
           {messages.map((message, index) => (
