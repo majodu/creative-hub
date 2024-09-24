@@ -48,7 +48,7 @@ const ChatInput = ({ defaultTemplate }) => {
           type="text"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          placeholder="Type your task here..."
+          placeholder="EX: classify a tweet with the tweet and classifications as variables"
           className="flex-grow px-4 py-2 rounded-l-lg focus:outline-none"
         />
         <button
