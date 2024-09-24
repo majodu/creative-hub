@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home, FolderTree, Activity, Settings, Archive, Plus, Chrome, Globe, Code } from 'lucide-react';
+import { Home, FolderTree, Activity, Settings, Archive } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Sidebar = () => {
@@ -61,34 +61,6 @@ const Sidebar = () => {
           </li>
         </ul>
       </nav>
-
-      {/* Integrations Section */}
-      <div className="mt-4">
-        <h4 className="text-xs font-semibold text-gray-500 mb-2 flex items-center">
-          Integrations
-          <Plus className="w-3 h-3 ml-1" />
-        </h4>
-        <ul className="space-y-2">
-          <li>
-            <a href="#" className="flex items-center text-gray-700 hover:text-black">
-              <Chrome className="w-4 h-4 mr-3" />
-              <span>Chrome plugin</span>
-            </a>
-          </li>
-          <li>
-            <a href="#" className="flex items-center text-gray-700 hover:text-black">
-              <Globe className="w-4 h-4 mr-3" />
-              <span>Web plugin</span>
-            </a>
-          </li>
-          <li>
-            <a href="#" className="flex items-center text-gray-700 hover:text-black">
-              <Code className="w-4 h-4 mr-3" />
-              <span>Source code</span>
-            </a>
-          </li>
-        </ul>
-      </div>
     </aside>
   );
 };
