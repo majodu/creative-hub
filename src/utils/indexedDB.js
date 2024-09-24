@@ -69,10 +69,21 @@ export const unarchivePrompt = async (id) => {
   return db.put(storeName, prompt);
 };
 
-export const getArchivedPrompts = async () => {
+export const getArchivedPrompts = async (searchTerm = '') => {
   const db = await initDB();
   const tx = db.transaction(storeName, 'readonly');
   const store = tx.objectStore(storeName);
   const index = store.index('archivedAt');
-  return index.getAll(IDBKeyRange.lowerBound(new Date(0)));
+  const archivedPrompts = await index.getAll(IDBKeyRange.lowerBound(new Date(0)));
+  
+  if (searchTerm) {
+    const lowerSearchTerm = searchTerm.toLowerCase();
+    return archivedPrompts.filter(prompt => 
+      prompt.title.toLowerCase().includes(lowerSearchTerm) ||
+      prompt.prompt.toLowerCase().includes(lowerSearchTerm) ||
+      prompt.tags.some(tag => tag.toLowerCase().includes(lowerSearchTerm))
+    );
+  }
+  
+  return archivedPrompts;
 };
