@@ -15,13 +15,19 @@ const initDB = async () => {
 
 const getStats = async () => {
   const db = await initDB();
-  return db.get(STORE_NAME, 'appStats') || {
-    id: 'appStats',
-    promptsCreated: 0,
-    promptsShared: 0,
-    chatMessagesSent: 0,
-    promptsUsed: 0,
-  };
+  const stats = await db.get(STORE_NAME, 'appStats');
+  if (!stats) {
+    const initialStats = {
+      id: 'appStats',
+      promptsCreated: 0,
+      promptsShared: 0,
+      chatMessagesSent: 0,
+      promptsUsed: 0,
+    };
+    await db.put(STORE_NAME, initialStats);
+    return initialStats;
+  }
+  return stats;
 };
 
 const updateStat = async (statName) => {
