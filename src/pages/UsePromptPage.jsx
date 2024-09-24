@@ -37,14 +37,20 @@ const UsePromptPage = () => {
   };
 
   const handleInputChange = (variable, value) => {
-    setVariables(prev => ({ ...prev, [variable]: value }));
-    updateFilledPrompt(variable, value);
+    setVariables(prev => {
+      const updatedVariables = { ...prev, [variable]: value };
+      updateFilledPrompt(updatedVariables);
+      return updatedVariables;
+    });
   };
 
-  const updateFilledPrompt = (changedVariable, value) => {
-    setFilledPrompt(prev => 
-      prev.replace(new RegExp(`\\{\\$${changedVariable}\\}`, 'g'), value)
-    );
+  const updateFilledPrompt = (updatedVariables) => {
+    let newFilledPrompt = promptData.prompt;
+    Object.entries(updatedVariables).forEach(([variable, value]) => {
+      const regex = new RegExp(`\\{\\$${variable}\\}`, 'g');
+      newFilledPrompt = newFilledPrompt.replace(regex, value);
+    });
+    setFilledPrompt(newFilledPrompt);
   };
 
   const handleSubmit = (e) => {
