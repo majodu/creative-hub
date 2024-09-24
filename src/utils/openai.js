@@ -1,4 +1,5 @@
 import { secureStore } from './secureStorage';
+import { incrementApiCallsMade } from './statistics';
 
 const OPENAI_API_URL = 'https://api.openai.com/v1/chat/completions';
 
@@ -33,6 +34,7 @@ export const generateOpenAIResponse = async (userInput) => {
     }
 
     const data = await response.json();
+    await incrementApiCallsMade();
     return data.choices[0].message.content.trim();
   } catch (error) {
     throw error;
@@ -70,6 +72,7 @@ export const generateOpenAIResponseForChatPage = async (userInput) => {
     }
 
     const data = await response.json();
+    await incrementApiCallsMade();
     return data.choices[0].message.content.trim();
   } catch (error) {
     throw error;

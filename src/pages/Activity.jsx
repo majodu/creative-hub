@@ -16,7 +16,7 @@ const Activity = () => {
   const chartData = stats ? [
     { name: 'Prompts Created', value: stats.promptsCreated },
     { name: 'Prompts Shared', value: stats.promptsShared },
-    { name: 'Chat Messages Sent', value: stats.chatMessagesSent },
+    { name: 'API Calls Made', value: stats.apiCallsMade },
     { name: 'Prompts Used', value: stats.promptsUsed },
   ] : [];
 

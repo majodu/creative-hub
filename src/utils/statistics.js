@@ -21,7 +21,7 @@ export const getStats = async () => {
       id: 'appStats',
       promptsCreated: 0,
       promptsShared: 0,
-      chatMessagesSent: 0,
+      apiCallsMade: 0,
       promptsUsed: 0,
     };
     await db.put(STORE_NAME, stats);
@@ -37,7 +37,7 @@ const updateStat = async (statName) => {
     id: 'appStats',
     promptsCreated: 0,
     promptsShared: 0,
-    chatMessagesSent: 0,
+    apiCallsMade: 0,
     promptsUsed: 0,
   };
   stats[statName]++;
@@ -47,5 +47,5 @@ const updateStat = async (statName) => {
 
 export const incrementPromptsCreated = () => updateStat('promptsCreated');
 export const incrementPromptsShared = () => updateStat('promptsShared');
-export const incrementChatMessagesSent = () => updateStat('chatMessagesSent');
+export const incrementApiCallsMade = () => updateStat('apiCallsMade');
 export const incrementPromptsUsed = () => updateStat('promptsUsed');

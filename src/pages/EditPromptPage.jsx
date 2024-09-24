@@ -13,6 +13,7 @@ import { ArrowLeft, Archive, Trash2, Play } from 'lucide-react';
 import PromptVersionControl from '../components/PromptVersionControl';
 import DiffIndicator from '../components/DiffIndicator';
 import DiffModal from '../components/DiffModal';
+import { incrementPromptsUsed } from '../utils/statistics';
 
 const EditPromptPage = () => {
   const { id } = useParams();
@@ -119,7 +120,8 @@ const EditPromptPage = () => {
     setIsDiffModalOpen(true);
   };
 
-  const handleUsePrompt = () => {
+  const handleUsePrompt = async () => {
+    await incrementPromptsUsed();
     navigate(`/use-prompt/${id}`);
   };
 
