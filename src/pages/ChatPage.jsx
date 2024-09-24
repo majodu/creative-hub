@@ -21,7 +21,7 @@ const ChatPage = () => {
       setMessages([{ role: 'user', content: location.state.initialMessage }]);
       chatMutation.mutate(location.state.initialMessage);
     }
-  }, [location.state]);
+  }, []);
 
   const chatMutation = useMutation({
     mutationFn: generateOpenAIResponseForChatPage,
