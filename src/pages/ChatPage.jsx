@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -15,13 +15,7 @@ const ChatPage = () => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const queryClient = useQueryClient();
-
-  useEffect(() => {
-    if (location.state && location.state.initialMessage) {
-      setMessages([{ role: 'user', content: location.state.initialMessage }]);
-      chatMutation.mutate(location.state.initialMessage);
-    }
-  }, []);
+  const initialMessageSentRef = useRef(false);
 
   const chatMutation = useMutation({
     mutationFn: generateOpenAIResponseForChatPage,
@@ -34,6 +28,15 @@ const ChatPage = () => {
       console.error('Error in chat mutation:', error);
     }
   });
+
+  useEffect(() => {
+    if (location.state?.initialMessage && !initialMessageSentRef.current) {
+      const initialMessage = location.state.initialMessage;
+      setMessages([{ role: 'user', content: initialMessage }]);
+      chatMutation.mutate(initialMessage);
+      initialMessageSentRef.current = true;
+    }
+  }, [location.state, chatMutation]);
 
   const handleSendMessage = async (e) => {
     e.preventDefault();
