@@ -14,6 +14,10 @@ const Archive = () => {
   const { data: archivedPrompts, isLoading, error } = useQuery({
     queryKey: ['archivedPrompts', searchTerm],
     queryFn: () => getArchivedPrompts(searchTerm),
+    retry: 1,
+    onError: (error) => {
+      console.error('Error fetching archived prompts:', error);
+    },
   });
 
   const handleBack = () => {
@@ -21,7 +25,7 @@ const Archive = () => {
   };
 
   if (isLoading) return <div className="p-6">Loading archived prompts...</div>;
-  if (error) return <div className="p-6">Error loading archived prompts: {error.message}</div>;
+  if (error) return <div className="p-6">Error loading archived prompts. Please try refreshing the page.</div>;
 
   return (
     <div className="flex flex-col h-screen p-6">

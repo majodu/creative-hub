@@ -4,10 +4,13 @@ const dbName = 'PromptKeeperDB';
 const storeName = 'prompts';
 
 const initDB = async () => {
-  return openDB(dbName, 1, {
-    upgrade(db) {
-      if (!db.objectStoreNames.contains(storeName)) {
-        const store = db.createObjectStore(storeName, { keyPath: 'id', autoIncrement: true });
+  return openDB(dbName, 2, {
+    upgrade(db, oldVersion, newVersion, transaction) {
+      const store = db.objectStoreNames.contains(storeName)
+        ? transaction.objectStore(storeName)
+        : db.createObjectStore(storeName, { keyPath: 'id', autoIncrement: true });
+      
+      if (!store.indexNames.contains('archivedAt')) {
         store.createIndex('archivedAt', 'archivedAt');
       }
     },
