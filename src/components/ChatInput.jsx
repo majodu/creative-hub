@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { generateOpenAIResponse } from '../utils/openai';
 import { toast } from 'sonner';
 
-const ChatInput = () => {
+const ChatInput = ({ defaultTemplate }) => {
   const [message, setMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
@@ -13,7 +13,8 @@ const ChatInput = () => {
     if (message.trim()) {
       setIsLoading(true);
       try {
-        const generatedResponse = await generateOpenAIResponse(message);
+        const promptWithTask = defaultTemplate.replace('{{task}}', message);
+        const generatedResponse = await generateOpenAIResponse(promptWithTask);
         navigate('/new-prompt', { state: { initialPrompt: generatedResponse } });
       } catch (error) {
         console.error('Error generating response:', error);
@@ -47,7 +48,7 @@ const ChatInput = () => {
           type="text"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          placeholder="Type your template description here..."
+          placeholder="Type your task here..."
           className="flex-grow px-4 py-2 rounded-l-lg focus:outline-none"
         />
         <button

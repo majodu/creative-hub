@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import SearchBar from '../components/SearchBar';
 import PromptGrid from '../components/PromptGrid';
@@ -7,16 +7,26 @@ import ExportWidget from '../components/ExportWidget';
 import { getAllPrompts } from '../utils/indexedDB';
 import { Button } from "@/components/ui/button";
 import { BookmarkIcon } from 'lucide-react';
+import { secureStore } from '../utils/secureStorage';
 
 const Index = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [showBookmarked, setShowBookmarked] = useState(false);
   const [selectedPrompts, setSelectedPrompts] = useState([]);
+  const [defaultTemplate, setDefaultTemplate] = useState('');
 
   const { data: prompts, isLoading, error } = useQuery({
     queryKey: ['prompts'],
-    queryFn: () => getAllPrompts(false), // Pass false to exclude archived prompts
+    queryFn: () => getAllPrompts(false),
   });
+
+  useEffect(() => {
+    const loadDefaultTemplate = async () => {
+      const template = await secureStore.getItem('defaultPrompt');
+      setDefaultTemplate(template || '');
+    };
+    loadDefaultTemplate();
+  }, []);
 
   const handleSearch = (term) => {
     setSearchTerm(term);
@@ -80,7 +90,7 @@ const Index = () => {
         </div>
       </div>
       <div className="p-6 bg-white border-t">
-        <ChatInput />
+        <ChatInput defaultTemplate={defaultTemplate} />
       </div>
     </main>
   );

@@ -4,13 +4,10 @@ const OPENAI_API_URL = 'https://api.openai.com/v1/chat/completions';
 
 export const generateOpenAIResponse = async (userInput) => {
   const apiKey = await secureStore.getItem('openaiKey');
-  const defaultPrompt = await secureStore.getItem('defaultPrompt') || '';
 
   if (!apiKey) {
     throw new Error('OpenAI API key not found. Please set it in the Settings page.');
   }
-
-  const fullPrompt = `${defaultPrompt}\n\nUser: ${userInput}`;
 
   try {
     const response = await fetch(OPENAI_API_URL, {
@@ -21,7 +18,7 @@ export const generateOpenAIResponse = async (userInput) => {
       },
       body: JSON.stringify({
         model: 'gpt-3.5-turbo',
-        messages: [{ role: 'user', content: fullPrompt }],
+        messages: [{ role: 'user', content: userInput }],
         max_tokens: 150
       })
     });
