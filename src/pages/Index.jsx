@@ -3,7 +3,6 @@ import { useQuery } from '@tanstack/react-query';
 import SearchBar from '../components/SearchBar';
 import PromptGrid from '../components/PromptGrid';
 import ChatInput from '../components/ChatInput';
-import ExportWidget from '../components/ExportWidget';
 import { getAllPrompts } from '../utils/indexedDB';
 import { Button } from "@/components/ui/button";
 import { BookmarkIcon } from 'lucide-react';
@@ -12,7 +11,6 @@ import { secureStore } from '../utils/secureStorage';
 const Index = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [showBookmarked, setShowBookmarked] = useState(false);
-  const [selectedPrompts, setSelectedPrompts] = useState([]);
   const [defaultTemplate, setDefaultTemplate] = useState('');
 
   const { data: prompts, isLoading, error } = useQuery({
@@ -34,14 +32,6 @@ const Index = () => {
 
   const toggleBookmarkFilter = () => {
     setShowBookmarked(!showBookmarked);
-  };
-
-  const handlePromptSelection = (promptId) => {
-    setSelectedPrompts(prev => 
-      prev.includes(promptId) 
-        ? prev.filter(id => id !== promptId)
-        : [...prev, promptId]
-    );
   };
 
   const filteredPrompts = prompts
@@ -72,21 +62,10 @@ const Index = () => {
               <BookmarkIcon className="h-3 w-3 mr-1" />
               <span>{showBookmarked ? "Show All" : "Show Bookmarked"}</span>
             </Button>
-            {selectedPrompts.length > 0 && (
-              <ExportWidget 
-                selectedPrompts={selectedPrompts} 
-                prompts={prompts}
-                className="text-xs text-gray-500 hover:text-gray-700"
-              />
-            )}
           </div>
         </div>
         <div className="flex-grow overflow-y-auto px-6 pb-6">
-          <PromptGrid 
-            prompts={filteredPrompts} 
-            onSelect={handlePromptSelection}
-            selectedPrompts={selectedPrompts}
-          />
+          <PromptGrid prompts={filteredPrompts} />
         </div>
       </div>
       <div className="p-6 bg-white border-t">
