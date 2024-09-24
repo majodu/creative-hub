@@ -20,7 +20,7 @@ export const generateOpenAIResponse = async (userInput) => {
       body: JSON.stringify({
         model: defaultModel,
         messages: [{ role: 'user', content: userInput }],
-        max_tokens: 150
+        max_tokens: 1000  // Increased to allow for longer responses
       })
     });
 
@@ -56,7 +56,7 @@ export const generateOpenAIResponseForChatPage = async (userInput) => {
       body: JSON.stringify({
         model: defaultModel,
         messages: [{ role: 'user', content: userInput }],
-        max_tokens: 150
+        max_tokens: 1000  // Increased to allow for longer responses
       })
     });
 
