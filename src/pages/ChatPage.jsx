@@ -45,30 +45,34 @@ const ChatPage = () => {
   };
 
   return (
-    <div className="flex flex-col h-screen p-6">
+    <div className="flex flex-col h-screen p-4 md:p-6 max-w-4xl mx-auto">
       <h1 className="text-2xl font-bold mb-6">Chat with AI</h1>
       <ScrollArea className="flex-grow mb-4 p-4 border rounded-lg">
-        {messages.map((message, index) => (
-          <div key={index} className={`mb-4 ${message.role === 'user' ? 'text-right' : 'text-left'}`}>
-            <div className={`inline-block p-2 rounded-lg ${message.role === 'user' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}>
-              <ReactMarkdown 
-                className="prose max-w-none"
-                components={{
-                  p: ({node, ...props}) => <p className="mb-2" {...props} />,
-                  pre: ({node, ...props}) => <pre className="bg-gray-800 text-white p-2 rounded" {...props} />,
-                  code: ({node, inline, ...props}) => 
-                    inline 
-                      ? <code className="bg-gray-200 text-red-500 px-1 rounded" {...props} />
-                      : <code className="block bg-gray-800 text-white p-2 rounded" {...props} />,
-                }}
-              >
-                {message.content}
-              </ReactMarkdown>
+        <div className="space-y-4">
+          {messages.map((message, index) => (
+            <div key={index} className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+              <div className={`max-w-[80%] md:max-w-[70%] p-3 rounded-lg ${
+                message.role === 'user' ? 'bg-blue-500 text-white' : 'bg-gray-200'
+              }`}>
+                <ReactMarkdown 
+                  className="prose max-w-none dark:prose-invert"
+                  components={{
+                    p: ({node, ...props}) => <p className="mb-2" {...props} />,
+                    pre: ({node, ...props}) => <pre className="bg-gray-800 text-white p-2 rounded overflow-x-auto" {...props} />,
+                    code: ({node, inline, ...props}) => 
+                      inline 
+                        ? <code className="bg-gray-200 text-red-500 px-1 rounded" {...props} />
+                        : <code className="block bg-gray-800 text-white p-2 rounded overflow-x-auto" {...props} />,
+                  }}
+                >
+                  {message.content}
+                </ReactMarkdown>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
         {chatMutation.isLoading && (
-          <div className="text-center text-gray-500">AI is thinking...</div>
+          <div className="text-center text-gray-500 mt-4">AI is thinking...</div>
         )}
       </ScrollArea>
       <form onSubmit={handleSendMessage} className="flex gap-2">
