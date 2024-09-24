@@ -3,7 +3,14 @@ import { compareTexts } from '../utils/diffUtils';
 import { Button } from "@/components/ui/button";
 
 const DiffIndicator = ({ oldText, newText, onViewChanges }) => {
-  const differences = compareTexts(oldText, newText);
+  let differences = [];
+  try {
+    differences = compareTexts(oldText, newText);
+  } catch (error) {
+    console.error('Error comparing texts:', error);
+    // Handle the error gracefully, maybe set a state to show an error message
+  }
+
   const addedLines = differences.filter(d => d.added).length;
   const removedLines = differences.filter(d => d.removed).length;
 
