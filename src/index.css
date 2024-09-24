@@ -1,3 +1,5 @@
+@import './styles/markdown.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -74,5 +76,3 @@
     @apply bg-background text-foreground;
   }
 }
-
-@import './styles/markdown.css';

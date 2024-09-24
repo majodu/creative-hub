@@ -8,7 +8,7 @@ import { generateOpenAIResponseForChatPage } from '../utils/openai';
 import { toast } from 'sonner';
 import ReactMarkdown from 'react-markdown';
 import { Copy } from 'lucide-react';
-import { incrementChatMessagesSent } from '../utils/statistics';
+import { incrementApiCallsMade } from '../utils/statistics';
 
 const ChatPage = () => {
   const location = useLocation();
@@ -46,7 +46,7 @@ const ChatPage = () => {
     setMessages(prev => [...prev, userMessage]);
     setInput('');
 
-    await incrementChatMessagesSent();
+    await incrementApiCallsMade();
     chatMutation.mutate(input);
   };
 
@@ -97,7 +97,7 @@ const ChatPage = () => {
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder="Type your message here..."
+          placeholder="EX: classify a tweet with the tweet and classifications as variables"
           className="flex-grow"
         />
         <Button type="submit" disabled={chatMutation.isLoading}>Send</Button>
