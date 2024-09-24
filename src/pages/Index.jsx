@@ -4,9 +4,10 @@ import SearchBar from '../components/SearchBar';
 import PromptGrid from '../components/PromptGrid';
 import ChatInput from '../components/ChatInput';
 import ExportWidget from '../components/ExportWidget';
-import { getAllPrompts } from '../utils/indexedDB';
+import { getAllPrompts, getRecentlyArchivedPrompts, unarchivePrompt } from '../utils/indexedDB';
 import { Button } from "@/components/ui/button";
-import { BookmarkIcon } from 'lucide-react';
+import { BookmarkIcon, ArchiveRestore } from 'lucide-react';
+import { toast } from 'sonner';
 
 const Index = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -16,6 +17,11 @@ const Index = () => {
   const { data: prompts, isLoading, error } = useQuery({
     queryKey: ['prompts'],
     queryFn: getAllPrompts,
+  });
+
+  const { data: recentlyArchivedPrompts } = useQuery({
+    queryKey: ['recentlyArchivedPrompts'],
+    queryFn: () => getRecentlyArchivedPrompts(5), // Get 5 most recently archived prompts
   });
 
   const handleSearch = (term) => {
@@ -32,6 +38,16 @@ const Index = () => {
         ? prev.filter(id => id !== promptId)
         : [...prev, promptId]
     );
+  };
+
+  const handleUnarchive = async (promptId) => {
+    try {
+      await unarchivePrompt(promptId);
+      toast.success('Prompt unarchived successfully!');
+    } catch (error) {
+      console.error('Error unarchiving prompt:', error);
+      toast.error('Failed to unarchive prompt. Please try again.');
+    }
   };
 
   const filteredPrompts = prompts
@@ -77,6 +93,27 @@ const Index = () => {
             onSelect={handlePromptSelection}
             selectedPrompts={selectedPrompts}
           />
+          {recentlyArchivedPrompts && recentlyArchivedPrompts.length > 0 && (
+            <div className="mt-8">
+              <h2 className="text-xl font-semibold mb-4">Recently Archived</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {recentlyArchivedPrompts.map((prompt) => (
+                  <div key={prompt.id} className="bg-gray-100 p-4 rounded-lg flex justify-between items-center">
+                    <span className="font-medium">{prompt.title}</span>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => handleUnarchive(prompt.id)}
+                      className="text-blue-500 hover:text-blue-700"
+                    >
+                      <ArchiveRestore className="h-4 w-4 mr-1" />
+                      Unarchive
+                    </Button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </div>
       <div className="p-6 bg-white border-t">

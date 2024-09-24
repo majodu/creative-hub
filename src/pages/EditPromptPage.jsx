@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
 import { getPromptById, updatePrompt, archivePrompt, deletePrompt } from '../utils/indexedDB';
 import { compareTexts } from '../utils/diffUtils';
 import { toast } from 'sonner';
@@ -59,6 +60,7 @@ const EditPromptPage = () => {
     mutationFn: archivePrompt,
     onSuccess: () => {
       queryClient.invalidateQueries(['prompts']);
+      queryClient.invalidateQueries(['recentlyArchivedPrompts']);
       toast.success('Prompt archived successfully!');
       navigate('/');
     },
@@ -94,15 +96,11 @@ const EditPromptPage = () => {
   };
 
   const handleArchive = () => {
-    if (window.confirm('Are you sure you want to archive this prompt?')) {
-      archivePromptMutation.mutate(parseInt(id));
-    }
+    archivePromptMutation.mutate(parseInt(id));
   };
 
   const handleDelete = () => {
-    if (window.confirm('Are you sure you want to delete this prompt? This action cannot be undone.')) {
-      deletePromptMutation.mutate(parseInt(id));
-    }
+    deletePromptMutation.mutate(parseInt(id));
   };
 
   const handleBack = () => {
@@ -134,22 +132,52 @@ const EditPromptPage = () => {
           <ArrowLeft className="mr-2 h-4 w-4" /> Back
         </Button>
         <div className="flex space-x-2">
-          <Button
-            variant="ghost"
-            size="icon"
-            className="text-yellow-500 hover:text-yellow-700 hover:bg-yellow-100"
-            onClick={handleArchive}
-          >
-            <Archive className="h-5 w-5" />
-          </Button>
-          <Button
-            variant="ghost"
-            size="icon"
-            className="text-red-500 hover:text-red-700 hover:bg-red-100"
-            onClick={handleDelete}
-          >
-            <Trash2 className="h-5 w-5" />
-          </Button>
+          <AlertDialog>
+            <AlertDialogTrigger asChild>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="text-yellow-500 hover:text-yellow-700 hover:bg-yellow-100"
+              >
+                <Archive className="h-5 w-5" />
+              </Button>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>Archive Prompt</AlertDialogTitle>
+                <AlertDialogDescription>
+                  Are you sure you want to archive this prompt? You can unarchive it later from the Archive page.
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                <AlertDialogAction onClick={handleArchive}>Archive</AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
+          <AlertDialog>
+            <AlertDialogTrigger asChild>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="text-red-500 hover:text-red-700 hover:bg-red-100"
+              >
+                <Trash2 className="h-5 w-5" />
+              </Button>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>Delete Prompt</AlertDialogTitle>
+                <AlertDialogDescription>
+                  Are you sure you want to delete this prompt? This action cannot be undone.
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                <AlertDialogAction onClick={handleDelete}>Delete</AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
         </div>
       </div>
       <h1 className="text-2xl font-bold mb-6">Edit Prompt Template</h1>
