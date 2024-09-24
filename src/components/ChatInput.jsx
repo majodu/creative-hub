@@ -13,7 +13,7 @@ const ChatInput = ({ defaultTemplate }) => {
     if (message.trim()) {
       setIsLoading(true);
       try {
-        const promptWithTask = defaultTemplate.replace('{{task}}', message);
+        const promptWithTask = defaultTemplate.replace('{{TASK}}', message);
         const generatedResponse = await generateOpenAIResponse(promptWithTask);
         navigate('/new-prompt', { state: { initialPrompt: generatedResponse } });
       } catch (error) {

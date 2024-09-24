@@ -23,7 +23,7 @@ const Index = () => {
   useEffect(() => {
     const loadDefaultTemplate = async () => {
       const template = await secureStore.getItem('defaultPrompt');
-      setDefaultTemplate(template || '');
+      setDefaultTemplate(template || 'Generate a response for the following task: {{TASK}}');
     };
     loadDefaultTemplate();
   }, []);
