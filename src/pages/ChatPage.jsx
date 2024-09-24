@@ -72,13 +72,12 @@ const ChatPage = () => {
             {message.role === 'assistant' && (
               <div className="mt-2">
                 <Button
-                  variant="outline"
-                  size="sm"
+                  variant="ghost"
+                  size="icon"
                   onClick={() => handleCopyText(message.content)}
-                  className="flex items-center space-x-1"
+                  className="p-1 h-6 w-6"
                 >
                   <Copy className="h-4 w-4" />
-                  <span>Copy</span>
                 </Button>
               </div>
             )}
