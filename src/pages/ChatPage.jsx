@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { generateOpenAIResponse } from '../utils/openai';
+import { generateOpenAIResponseForChatPage } from '../utils/openai';
 import { toast } from 'sonner';
 
 const ChatPage = () => {
@@ -12,7 +12,7 @@ const ChatPage = () => {
   const queryClient = useQueryClient();
 
   const chatMutation = useMutation({
-    mutationFn: generateOpenAIResponse,
+    mutationFn: generateOpenAIResponseForChatPage,
     onSuccess: (data) => {
       setMessages(prev => [...prev, { role: 'assistant', content: data }]);
       queryClient.invalidateQueries(['chatPageHistory']);
