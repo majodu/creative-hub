@@ -50,7 +50,7 @@ const PromptCard = ({ id, title, prompt, likes, tags, bookmarked, onSelect, isSe
 
   return (
     <div 
-      className="bg-white p-3 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow cursor-pointer relative group"
+      className="bg-white p-3 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow cursor-pointer relative"
       onClick={handleCardClick}
     >
       <div className="flex justify-between items-start">
@@ -63,19 +63,29 @@ const PromptCard = ({ id, title, prompt, likes, tags, bookmarked, onSelect, isSe
           />
           <h2 className="text-lg font-semibold text-gray-900">{title}</h2>
         </div>
-        <Button 
-          variant="ghost"
-          size="icon"
-          className={`text-gray-400 hover:text-gray-600 ${bookmarked ? 'text-blue-500' : ''}`}
-          onClick={handleBookmark}
-          disabled={bookmarkMutation.isLoading}
-        >
-          {bookmarked ? (
-            <BookmarkCheck className="h-4 w-4" />
-          ) : (
-            <Bookmark className="h-4 w-4" />
-          )}
-        </Button>
+        <div className="flex space-x-2">
+          <Button 
+            variant="ghost"
+            size="icon"
+            className="text-gray-400 hover:text-gray-600"
+            onClick={handleCopy}
+          >
+            <Copy className="h-4 w-4" />
+          </Button>
+          <Button 
+            variant="ghost"
+            size="icon"
+            className={`text-gray-400 hover:text-gray-600 ${bookmarked ? 'text-blue-500' : ''}`}
+            onClick={handleBookmark}
+            disabled={bookmarkMutation.isLoading}
+          >
+            {bookmarked ? (
+              <BookmarkCheck className="h-4 w-4" />
+            ) : (
+              <Bookmark className="h-4 w-4" />
+            )}
+          </Button>
+        </div>
       </div>
       <p className="mt-1 text-xs text-gray-600">{truncateText(prompt, 100)}</p>
       <div className="mt-3 flex items-center justify-between">
@@ -96,14 +106,6 @@ const PromptCard = ({ id, title, prompt, likes, tags, bookmarked, onSelect, isSe
           </div>
         )}
       </div>
-      <Button 
-        variant="ghost"
-        size="icon"
-        className="absolute bottom-2 right-2 text-gray-400 hover:text-gray-600 opacity-0 group-hover:opacity-100 transition-opacity"
-        onClick={handleCopy}
-      >
-        <Copy className="h-4 w-4" />
-      </Button>
     </div>
   );
 };
